@@ -1,0 +1,304 @@
+{
+   "$schema": "http://json-schema.org/draft-07/schema#",
+   "type": "object",
+   "properties": {
+      "id": {
+         "type": "string"
+      },
+      "ip": {
+         "type": "object",
+         "properties": {
+            "id": {
+               "type": "string"
+            },
+            "raw_file1": {
+               "type": "string"
+            },
+            "raw_file2": {
+               "type": "string"
+            },
+            "dedup_bam_file": {
+               "type": "string"
+            },
+            "alignment": {
+               "type": "object",
+               "properties": {
+                  "total_reads": {
+                     "type": "integer"
+                  },
+                  "mapped_reads": {
+                     "type": "integer"
+                  },
+                  "dedup_reads": {
+                     "type": "integer"
+                  },
+                  "gc_content": {
+                     "type": "array",
+                     "items": {
+                        "type": "number"
+                     }
+                  },
+                  "quality_score": {
+                     "type": "array",
+                     "items": {
+                        "type": "number"
+                     }
+                  }
+               },
+               "required": [
+                  "dedup_reads",
+                  "gc_content",
+                  "mapped_reads",
+                  "quality_score",
+                  "total_reads"
+               ]
+            },
+            "contamination": {
+               "type": "object",
+               "properties": {
+                  "contamination_percent": {
+                     "type": "array",
+                     "items": {
+                        "type": "number"
+                     }
+                  }
+               },
+               "required": [
+                  "contamination_percent"
+               ]
+            },
+            "pbc": {
+               "type": "object",
+               "properties": {
+                  "Nd_count": {
+                     "type": "integer"
+                  },
+                  "N1_count": {
+                     "type": "integer"
+                  },
+                  "pbc": {
+                     "type": "number"
+                  }
+               },
+               "required": [
+                  "N1_count",
+                  "Nd_count",
+                  "pbc"
+               ]
+            }
+         },
+         "required": [
+            "alignment",
+            "contamination",
+            "dedup_bam_file",
+            "id",
+            "pbc",
+            "raw_file1",
+            "raw_file2"
+         ]
+      },
+      "control": {
+         "type": "object",
+         "properties": {
+            "id": {
+               "type": "string"
+            },
+            "raw_file1": {
+               "type": "string"
+            },
+            "raw_file2": {
+               "type": "string"
+            },
+            "dedup_bam_file": {
+               "type": "string"
+            },
+            "alignment": {
+               "type": "object",
+               "properties": {
+                  "total_reads": {
+                     "type": "integer"
+                  },
+                  "mapped_reads": {
+                     "type": "integer"
+                  },
+                  "dedup_reads": {
+                     "type": "integer"
+                  },
+                  "gc_content": {
+                     "type": "array",
+                     "items": {
+                        "type": "number"
+                     }
+                  },
+                  "quality_score": {
+                     "type": "array",
+                     "items": {
+                        "type": "number"
+                     }
+                  }
+               },
+               "required": [
+                  "dedup_reads",
+                  "gc_content",
+                  "mapped_reads",
+                  "quality_score",
+                  "total_reads"
+               ]
+            },
+            "contamination": {
+               "type": "object",
+               "properties": {
+                  "contamination_percent": {
+                     "type": "array",
+                     "items": {
+                        "type": "number"
+                     }
+                  }
+               },
+               "required": [
+                  "contamination_percent"
+               ]
+            },
+            "pbc": {
+               "type": "object",
+               "properties": {
+                  "Nd_count": {
+                     "type": "integer"
+                  },
+                  "N1_count": {
+                     "type": "integer"
+                  },
+                  "pbc": {
+                     "type": "number"
+                  }
+               },
+               "required": [
+                  "N1_count",
+                  "Nd_count",
+                  "pbc"
+               ]
+            }
+         },
+         "required": [
+            "alignment",
+            "contamination",
+            "dedup_bam_file",
+            "id",
+            "pbc",
+            "raw_file1",
+            "raw_file2"
+         ]
+      },
+      "ip_results": {
+         "type": "object",
+         "properties": {
+            "peaks": {
+               "type": "string"
+            },
+            "peaks_qc": {
+               "type": "object",
+               "properties": {
+                  "total_peaks": {
+                     "type": "integer"
+                  },
+                  "fc_10": {
+                     "type": "integer"
+                  },
+                  "fc_20": {
+                     "type": "integer"
+                  },
+                  "dhs": {
+                     "type": "number"
+                  },
+                  "promoter": {
+                     "type": "integer"
+                  },
+                  "exon": {
+                     "type": "integer"
+                  },
+                  "intron": {
+                     "type": "integer"
+                  },
+                  "intergenic": {
+                     "type": "integer"
+                  }
+               },
+               "required": [
+                  "dhs",
+                  "exon",
+                  "fc_10",
+                  "fc_20",
+                  "intergenic",
+                  "intron",
+                  "promoter",
+                  "total_peaks"
+               ]
+            },
+            "frip": {
+               "type": "object",
+               "properties": {
+                  "reads_in_peaks": {
+                     "type": "integer"
+                  },
+                  "total_reads": {
+                     "type": "integer"
+                  },
+                  "frip": {
+                     "type": "number"
+                  }
+               },
+               "required": [
+                  "frip",
+                  "reads_in_peaks",
+                  "total_reads"
+               ]
+            },
+            "targets": {
+               "type": "object",
+               "properties": {
+                  "peak_targets": {
+                     "type": "string"
+                  }
+               },
+               "required": [
+                  "peak_targets"
+               ]
+            },
+            "conservations": {
+               "type": "object",
+               "properties": {
+                  "x_axis": {
+                     "type": "array",
+                     "items": {
+                        "type": "integer"
+                     }
+                  },
+                  "y_axis": {
+                     "type": "array",
+                     "items": {
+                        "type": "number"
+                     }
+                  }
+               },
+               "required": [
+                  "x_axis",
+                  "y_axis"
+               ]
+            }
+         },
+         "required": [
+            "conservations",
+            "frip",
+            "peaks",
+            "peaks_qc",
+            "targets"
+         ]
+      }
+   },
+   "required": [
+      "control",
+      "id",
+      "ip",
+      "ip_results"
+   ]
+}

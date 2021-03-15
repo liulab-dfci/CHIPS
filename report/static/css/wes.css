@@ -1,0 +1,66 @@
+/* custom CSS for WES REPORT code below 
+ * copyright 2020 Len Taing (TGBTG)
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/blob/master/LICENSE)
+ */
+
+.wes_container {
+  padding: 3rem;
+}
+
+.wes_table {
+  padding: 1rem;
+}
+
+#sidebar-wrapper .sidebar-sub-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.0rem;
+  font-weight: bold;
+  background: #585778;
+  color: white;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  background: #22204c;
+  color: white;
+  height: 4.75rem; /*to match the navbar*/
+}
+
+/* navbar */
+#topbar {
+  background: #22204c;
+}
+
+#cidc-brand{
+  color: white;
+}
+
+/* mqc table additions */
+/* hidden class doesn't seem to be defined anywhere so we'll do it */
+.hidden {
+  display: none;
+}
+
+/* turn off 'Plot' btn in mqc tables b/c it doesn't work and isn't useful*/
+.mqc_table_makeScatter {
+  display: none;
+}
+
+table.dataTable tr th.select-checkbox.selected::after {
+   content: "✔";
+   margin-top: -11px;
+   margin-left: -4px;
+   text-align: center;
+   text-shadow: rgb(176, 190, 217) 1px 1px, rgb(176, 190, 217) -1px -1px, rgb(176, 190, 217) 1px -1px, rgb(176, 190, 217) -1px 1px;
+}
+
+/*scrolling-wrapper from https://codeburst.io/how-to-create-horizontal-scrolling-containers-d8069651e9c6*/
+.scrolling-wrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+
+  .card {
+    display: inline-block;
+  }
+}
+

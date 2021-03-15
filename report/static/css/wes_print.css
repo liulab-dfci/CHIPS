@@ -1,0 +1,16 @@
+#sidebar-wrapper {
+   display: none;
+}
+
+.container {
+   display:block!important;
+   width:100%;
+}
+
+/* Add page breaks below */
+/* NOTE: there's page-break-before, page-break-after, page-break-inside */
+/* EXAMPLE:
+#GC_Content {
+   page-break-inside: avoid;
+}
+*/

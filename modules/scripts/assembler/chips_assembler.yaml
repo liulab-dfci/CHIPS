@@ -1,0 +1,9 @@
+#Assembly name
+assembly_name: mm10
+
+#FASTA file
+fasta: /data/static_libraries/assembly/UCSC_MM10/rawgenome/mm10.fa
+refGene: ./mm10.refGene
+
+conservation_bw: ./conservation/mm10.60way.phastCons.bw
+#genome_size: '1.87e9'

@@ -1,0 +1,16 @@
+name: chips
+channels:
+- bioconda
+- conda-forge
+- defaults
+dependencies:
+#GENERAL
+- snakemake=5.4.5
+- samtools>=1.8
+- python>=3.5.2
+- r>=3.4.1
+- numpy
+- tabulate
+- ruamel.yaml
+- pandas
+- seaborn

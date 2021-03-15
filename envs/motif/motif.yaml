@@ -1,0 +1,9 @@
+name: motif
+channels:
+- bioconda
+- conda-forge
+- defaults
+dependencies:
+- perl>=5.18.2
+- homer>=4.7
+- weblogo=2.8.2=3

@@ -1,0 +1,9 @@
+name: conservation
+channels:
+- bioconda
+- conda-forge
+- defaults
+dependencies:
+- python>=3.5
+- pybigwig
+- r>=3.4.1

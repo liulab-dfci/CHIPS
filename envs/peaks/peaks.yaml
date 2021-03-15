@@ -1,0 +1,11 @@
+name: peaks
+channels:
+- bioconda
+#- conda-forge
+- defaults
+dependencies:
+- ucsc-bedsort>=332
+- ucsc-bedgraphtobigwig>=332
+- seaborn
+- pandas
+- macs2

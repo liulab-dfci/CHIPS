@@ -1,0 +1,41 @@
+<div id="{{ container }}" class="wes_table">
+  <h3 class="hidden-lg-down">{{ title }}</h3>
+  {% if caption %}
+  <p class="text-justify">{{ caption }}</p>
+  {% endif %}
+  <div class="scrolling-wrapper">
+  <table id="{{ id }}" class="table table-striped {{ class }}" >
+    {% if header %}
+    <thead>
+      <tr>
+	{% for c in header %}
+	<th scope="col">{{ c }}</th>
+	{% endfor %}
+      </tr>
+    </thead>
+    {% endif %}
+    <tbody>
+      {% for r in table %}
+      <tr>
+	{% for c in r %}
+	{% if loop.index == 1 %} {# HANDLE hdr cells #}
+	<th scope="row">{{ c }}</th>
+	{% else %}
+	{% if c is imagefile %} {# HANDLE image cells #}
+	<td><img class="img-fluid img-thumbnail wes-image-modal" src="{{ c|get_value }}" alt="" style="cursor:pointer"></td>
+	{% elif c is color %} {# HANDLE red cells #}
+	<td style="color:{{ c|get_prefix }}">{{ c|get_value }}</td>
+	{% else %}
+	<td>{{ c }}</td>
+	{% endif %}
+	{% endif %}
+	{% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% if sub_caption %}
+  <p class="text-center font-weight-bold">{{ sub_caption }}</p>
+  {% endif %}
+</div>
+</div>

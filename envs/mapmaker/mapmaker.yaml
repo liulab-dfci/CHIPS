@@ -1,0 +1,8 @@
+name: mapmaker
+channels:
+- anaconda
+#- conda-forge
+- defaults
+dependencies:
+- git
+- ruamel.yaml

@@ -1,0 +1,9 @@
+name: align_bwa
+channels:
+- bioconda
+#- conda-forge
+- defaults
+dependencies:
+- bwa>=0.7.15
+- samtools
+- python>=3.5

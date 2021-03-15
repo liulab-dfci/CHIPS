@@ -1,0 +1,7 @@
+name: bam_snapshots
+channels:
+- bioconda
+#- conda-forge
+- defaults
+dependencies:
+- bioconductor-gviz

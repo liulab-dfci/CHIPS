@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="WES Summary Report">
+    <meta name="author" content="Len Taing 2020 (TGBTG)">
+
+    <title>WES Summary Report</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom styles for this template -->
+    <link href="static/css/simple-sidebar.css" rel="stylesheet">
+    <link href="static/css/wes.css" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <div class="d-flex" id="wrapper">
+
+      <!-- Sidebar -->
+      <div class="bg-light border-right" id="sidebar-wrapper">
+	<div class="sidebar-heading">WES Summary Report</div>
+	<div class="list-group list-group-flush">
+	  {% for section in sections %}
+	  <a href="#" onclick="toggler('{{ section[0] }}');" class="list-group-item list-group-item-action bg-light">{{ section[1] }}</a>
+	  {% endfor %}
+	  <!--<div class="sidebar-sub-heading">WES Level 1</div>-->
+	</div>
+      </div>
+      <!-- /#sidebar-wrapper -->
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper" class="scrolling-wrapper">
+
+	<!-- Navbar -->
+	<nav class="navbar navbar-expand-lg navbar-light  border-bottom" id="topbar">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+            <li class="nav-item">
+              <a class="navbar-brand" href="#" id="cidc-brand">CIDC</a>
+            </li>
+          </ul>
+	</nav>
+
+	<!-- #main content sections -->
+	{% for panel in panels %}
+	{{ panels[panel] }}
+	{% endfor %}
+      </div>
+      <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+    <div class="modal fade" id="wesImageModal" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <img class="image-fluid" id="wesImageModal_img">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="static/vendor/jquery/jquery.min.js"></script>
+    <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+      var last_section = '{{ first_section}}';
+    </script>
+    <script src="static/js/wes.js"></script>
+  </body>
+</html>

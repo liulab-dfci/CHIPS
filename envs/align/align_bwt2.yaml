@@ -1,0 +1,8 @@
+name: align_bwt2
+channels:
+- bioconda
+#- conda-forge
+- defaults
+dependencies:
+- bowtie2>=2.3.4.1
+

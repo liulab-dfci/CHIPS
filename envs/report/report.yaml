@@ -1,0 +1,12 @@
+name: report
+channels:
+- bioconda
+#- conda-forge
+- defaults
+dependencies:
+- r>=3.4.1
+- r-ggplot2>=2.2.0
+- r-reshape2>=1.4.2
+- pandas
+- seaborn
+

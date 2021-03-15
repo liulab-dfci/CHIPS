@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--<Session genome="hg19" hasGeneTrack="true" hasSequenceTrack="true" locus="All" path="./all_treatments.igv.xml" version="8">-->
+<Global genome="hg19" locus="All" version="3">
+    <Resources>
+    </Resources>
+    <Panel height="276" name="DataPanel" width="1401">
+    </Panel>
+    <Panel height="273" name="FeaturePanel" width="1401">
+        <Track altColor="0,0,178" autoScale="false" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="Reference sequence" name="Reference sequence" sortable="false" visible="true"/>
+    </Panel>
+    <PanelLayout dividerFractions="0.5"/>
+    <HiddenAttributes>
+        <Attribute name="DATA FILE"/>
+        <Attribute name="DATA TYPE"/>
+        <Attribute name="NAME"/>
+    </HiddenAttributes>
+</Global>

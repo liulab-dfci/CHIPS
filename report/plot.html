@@ -1,0 +1,10 @@
+<div id="{{ id }}" class="wes_plot">
+  <h3 class="hidden-lg-down">{{ title }}</h3>
+  {% if caption %}
+  <p class="text-justify">{{ caption }}</p>
+  {% endif %}
+  <img class="d-block img-fluid" src="{{ png_file }}" alt="{{ title }}">
+  {% if sub_caption %}
+  <p class="text-center font-weight-bold">{{ sub_caption }}</p>
+  {% endif %}
+</div>

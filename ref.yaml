@@ -1,0 +1,174 @@
+#REF.yaml - File to contain paths to static reference files that Chips requires
+#           for its analysis.
+# NOTE: these are already pre-filled for hg19 and mm9 (if you use the publicly
+#       available files found here: <link to chips static references)
+# NOTE: organized by assemblies
+# 
+# !VERY IMPORTANT: you can OVERRIDE any of these values in config.yaml!
+
+GDC_hg38:
+  bwa_index: ./ref_files/GDC_hg38/bwa_indices/GRCh38.d1.vd1.fa
+
+  geneTable: ./ref_files/GDC_hg38/GDC_hg38.refGene
+  geneBed: ./ref_files/GDC_hg38/GDC_hg38_refGene.bed
+  conservation: ./ref_files/GDC_hg38/conservation/hg38.phastCons100way.bw
+
+  DHS: ./ref_files/GDC_hg38/regions/hg38_cCREs.bed
+  exons: ./ref_files/GDC_hg38/regions/exon.bed
+  promoters: ./ref_files/GDC_hg38/regions/promoter.bed
+  velcro_regions: 
+
+  chrom_lens: ./ref_files/GDC_hg38/regions/chromInfo_hg38.txt
+
+  #MACS2 genome_size param: hs = 2.7e9, mm = 1.87e9, ce = 9e7, dm = 1.2e8
+  genome_size: "2.7e9"
+
+  #LEN: SHOULD MAYBE change to motif_genome
+  motif_path: hg38
+
+hg38:
+  bwa_index: ./ref_files/hg38/bwa_indices/hg38/hg38.fa
+
+  geneTable: ./ref_files/hg38/hg38.refGene
+  geneBed: ./ref_files/hg38/hg38_refGene.bed
+  conservation: ./ref_files/hg38/conservation/hg38.phastCons100way.bw
+
+  DHS: ./ref_files/hg38/regions/hg38_cCREs.bed
+  exons: ./ref_files/hg38/regions/exon.bed
+  promoters: ./ref_files/hg38/regions/promoter.bed
+  velcro_regions: 
+
+  chrom_lens: ./ref_files/hg38/regions/chromInfo_hg38.txt
+
+  #MACS2 genome_size param: hs = 2.7e9, mm = 1.87e9, ce = 9e7, dm = 1.2e8
+  genome_size: "2.7e9"
+
+  #LEN: SHOULD MAYBE change to motif_genome
+  motif_path: hg38
+
+hg19:
+  bwa_index: ./ref_files/hg19/bwa_indices/hg19/hg19.fa
+
+  geneTable: ./ref_files/hg19/hg19.refGene
+  geneBed: ./ref_files/hg19/hg19_refGene.bed
+  conservation: ./ref_files/hg19/conservation/hg19.100way.phastCons.bw
+
+  DHS: ./ref_files/hg19/regions/DHS_hg19.bed
+  exons: ./ref_files/hg19/regions/exon.bed
+  promoters: ./ref_files/hg19/regions/promoter.bed
+  velcro_regions: ./ref_files/hg19/regions/wgEncodeHg19ConsensusSignalArtifactRegions.bed
+
+  chrom_lens: ./ref_files/hg19/regions/hg19.len
+
+  #MACS2 genome_size param: hs = 2.7e9, mm = 1.87e9, ce = 9e7, dm = 1.2e8
+  genome_size: "2.7e9"
+
+  #LEN: SHOULD MAYBE change to motif_genome
+  motif_path: hg19
+
+mm10:
+  bwa_index: ./ref_files/mm10/bwa_indices/mm10.fa
+
+  geneTable: ./ref_files/mm10/mm10.refGene
+  geneBed: ./ref_files/mm10/mm10_refGene.bed
+  conservation: ./ref_files/mm10/conservation/mm10.60way.phastCons.bw
+
+  DHS: ./ref_files/mm10/regions/mm10.DHS.bed
+  exons: ./ref_files/mm10/regions/mm10.exon.bed
+  promoters: ./ref_files/mm10/regions/mm10.promoter.bed
+  velcro_regions: 
+
+  chrom_lens: ./ref_files/mm10/regions/mm10.len
+
+  #MACS2 genome_size param: hs = 2.7e9, mm = 1.87e9, ce = 9e7, dm = 1.2e8
+  genome_size: "1.87e9"
+
+  #LEN: SHOULD MAYBE change to motif_genome
+  motif_path: mm10
+
+mm9:
+  bwa_index: ./ref_files/mm9/bwa_indices/mm9/mm9.fa
+
+  geneTable: ./ref_files/mm9/mm9.refGene
+  geneBed: ./ref_files/mm9/mm9_refGene.bed
+  conservation: ./ref_files/mm9/conservation/mm9.phaston.30way.bw
+
+  DHS: ./ref_files/mm9/regions/DHS_mm9.bed
+  exons: ./ref_files/mm9/regions/mm9_exon.bed
+  promoters: ./ref_files/mm9/regions/mm9_promoter.bed
+  velcro_regions: 
+
+  chrom_lens: ./ref_files/mm9/regions/mm9.len
+
+  #MACS2 genome_size param: hs = 2.7e9, mm = 1.87e9, ce = 9e7, dm = 1.2e8
+  genome_size: "1.87e9"
+
+  #LEN: SHOULD MAYBE change to motif_genome
+  motif_path: mm9
+
+rn5:
+  bwa_index: ./ref_files/rn5/bwa_indices/rn5/rn5.fa
+
+  geneTable: ./ref_files/rn5/rn5.refGene
+  conservation: ./ref_files/rn5/conservation/rn5/vertebrate
+
+  DHS: 
+  exons: ./ref_files/rn5/regions/exon.bed
+  promoters: ./ref_files/rn5/regions/promoter.bed
+  velcro_regions: 
+
+  chrom_lens: ./ref_files/rn5/regions/rn5.len
+
+  #MACS2 genome_size param: hs = 2.7e9, mm = 1.87e9, ce = 9e7, dm = 1.2e8
+  #NOTE: as this value is not provided by MACS2, we are using the Ungapped 
+  #Length found here:
+  #https://www.ncbi.nlm.nih.gov/assembly/GCF_000001895.4/#/st
+  genome_size: "2.57e9"
+
+  #LEN: SHOULD MAYBE change to motif_genome
+  motif_path: rn5
+
+rn6:
+  bwa_index: ./ref_files/rn6/bwa_indices/rn6/rn6.fa
+
+  geneTable: ./ref_files/rn6/rn6.refGene
+  conservation: ./ref_files/rn6/conservation/rn6/vertebrate
+
+  DHS: 
+  exons: ./ref_files/rn6/regions/exon.bed
+  promoters: ./ref_files/rn6/regions/promoter.bed
+  velcro_regions: 
+
+  chrom_lens: ./ref_files/rn6/regions/rn6.len
+
+  #MACS2 genome_size param: hs = 2.7e9, mm = 1.87e9, ce = 9e7, dm = 1.2e8
+  #NOTE: as this value is not provided by MACS2, we are using the Ungapped 
+  #Length found here:
+  #https://www.ncbi.nlm.nih.gov/assembly/GCF_000001895.4/#/st
+  genome_size: "2.57e9"
+
+  #LEN: SHOULD MAYBE change to motif_genome
+  motif_path: rn6
+
+#NOTE: optional contamination panel to check sample contamination against
+#Each element should be a path to the INDEX for the aligner you want to use
+#The name of the file will be used in the table report, 
+#e.g. /some/path/to/BWA/e_coli.fasta will be reported as "e_coli"
+contamination_panel:
+  #- /some/path/to/BWA_index/
+  #- /some/path/to/BWA_index/
+  #- ./ref_files/contam_panel/hg19/hg19.fa
+  #- ./ref_files/contam_panel/mm9/mm9.fa
+  - ./ref_files/contam_panel/dm3/dm3.fa
+  - ./ref_files/contam_panel/S_cerevisiae/S_cerevisiae.fa
+  - ./ref_files/contam_panel/e_coli/e_coli.fasta
+  - ./ref_files/contam_panel/mycoplasma/GCF_000018785.1_ASM1878v1/myco_PG-8A.fna
+  - ./ref_files/contam_panel/mycoplasma/GCF_000085865.1_ASM8586v1/myco_ATCC23114.fna
+  - ./ref_files/contam_panel/mycoplasma/GCF_000186005.1_ASM18600v1/myco_m64.fna
+  - ./ref_files/contam_panel/mycoplasma/GCF_000313635.1_ASM31363v1/myco_SK76.fna
+  - ./ref_files/contam_panel/mycoplasma/GCF_000420105.1_ASM42010v1/myco_ATCC23714.fna
+  - ./ref_files/contam_panel/mycoplasma/GCF_000485555.1_ASM48555v1/myco_ATCC23064.fna
+  - ./ref_files/contam_panel/mycoplasma/GCF_001547975.1_ASM154797v1/myco_HAZ145_1.fna
+  - ./ref_files/contam_panel/mycoplasma/GCF_000027345.1_ASM2734v1/myco_ATCC29342.fna
+  - ./ref_files/contam_panel/mycoplasma/GCF_000092585.1_ASM9258v1/myco_R.fna
+  - ./ref_files/contam_panel/mycoplasma/GCF_000969765.1_ASM96976v1/myco_WVU1853.fna

@@ -1,0 +1,9 @@
+name: epicypherl
+channels:
+- bioconda
+#- conda-forge
+- defaults
+dependencies:
+- sambamba
+- samtools
+- bwa>=0.7.15

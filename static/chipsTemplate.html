@@ -1,0 +1,981 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Bootstrap js -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- Defined CSS -->
+    <style type="text/css">
+    body {
+        font-size: .875rem;
+    }
+
+
+    /*
+ * Sidebar
+ */
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 100;
+        padding: 48px 0 0;
+        /* Height of navbar */
+        box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+    }
+
+    .sidebar-sticky {
+        position: relative;
+        top: 0;
+        height: calc(100vh - 48px);
+        padding-top: .5rem;
+        overflow-x: hidden;
+        overflow-y: auto;
+        /* Scrollable contents if viewport is shorter than content. */
+    }
+
+    @supports ((position: -webkit-sticky) or (position: sticky)) {
+        .sidebar-sticky {
+            position: -webkit-sticky;
+            position: sticky;
+        }
+    }
+
+    .sidebar .nav-link {
+        font-weight: 500;
+        color: #333;
+    }
+
+    .sidebar .nav-link:hover {
+        font-weight: 800;
+        color: #777;
+    }
+
+    .sidebar .nav-link:active {
+        color: #82bce5;
+    }
+
+    .sidebar-heading {
+        font-size: .75rem;
+        text-transform: uppercase;
+    }
+
+
+    /*
+ * Content
+ */
+
+    [role="main"] {
+        padding-top: 133px;
+        /* Space for fixed navbar */
+    }
+
+    @media (min-width: 768px) {
+        [role="main"] {
+            padding-top: 48px;
+            /* Space for fixed navbar */
+        }
+    }
+
+    /*
+ * Navbar
+ */
+
+    .navbar-brand {
+        padding-top: .75rem;
+        padding-bottom: .75rem;
+        font-size: 1.25rem;
+        background-color: rgba(0, 0, 0, 0);
+        box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0);
+    }
+    </style>
+    <!-- <link href="./bootstrap4.css" rel="stylesheet"> -->
+    <!-- <link href="http://cistrome.org/~xindong/Chips_report/dashboard.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>
+    window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')
+    </script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <!-- A function to adjust navigate bar -->
+    <!--     <script type="text/javascript">
+    function fix_the_nav() {
+        if (window.location.hash) {
+            var target = $(location.hash);
+            $("body,html").scrollTop(target.offset().top - 80); // my nav size is 80px
+        }
+    }
+    </script> -->
+    <title>Chips</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark fixed-top navbar-expand-lg p-0" style="background-color:#1E284A"> <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="https://bitbucket.org/plumbers/cidc_chips/">Chips</a>
+        <div class="container-fluid">
+            <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+                <li class="nav-item active">
+                    <a class="nav-link nav-a" href="https://bitbucket.org/plumbers/cidc_chips/" style="font-size: 1rem">Chips Report</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <main style="margin-top: 5rem; margin-bottom: 5rem">
+        <div class="container-fluid">
+            <div id="firstCard" class="card text-left mr-4 ml-4">
+                <div class="card-header" id="firstHead">
+                    <button class="btn m-0 p-0" data-toggle="collapse" data-target="#overallInformation" aria-expanded="true" aria-controls="overallInformation">
+                        <h4 class="m-0 p-0">Overall Information</h4>
+                    </button>
+                </div>
+                <div id="overallInformation" class="card-body collapse show">
+                    <table class="table table-hover table-condensed" style="font-size: 0.8rem">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Chips Version</th>
+                                <td><a herf="https://bitbucket.org/plumbers/cidc_chips/commits/" οnclick=get_chips_version() id="ChipsVersion">{ChipsVersion}</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Results Path</th>
+                                <td id="ResultsPath">{ResultsPath}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Assembly Version</th>
+                                <td id="AssemblyVersion">{AssemblyVersion}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Using Sentieon</th>
+                                <td id="UsingSentieon">{UsingSentieon}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Aligner</th>
+                                <td id="Aligner">{Aligner}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Peaks Caller</th>
+                                <td id="PeaksCaller">{PeaksCaller}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Cutoff Of Filtering Out Long Reads</th>
+                                <td id="Cutoff">{Cutoff}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Motif Finder</th>
+                                <td id="MotifFinder">{MotifFinder}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Contamination Panel</th>
+                                <td id="ContaminationPanel">{ContaminationPanel}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">CNV Analysis</th>
+                                <td id="CNVAnalysis">{CNVAnalysis}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Runs Information</th>
+                                <td id="RunsInformation">{RunsInformation}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div id="secondCard" class="card text-left mr-4 ml-4 mt-3 mb-3">
+                <div class="card-header" id="secondHead">
+                    <button class="btn m-0 p-0" data-toggle="collapse" data-target="#groupview" aria-expanded="true" aria-controls="groupview">
+                        <h4 class="m-0 p-0">Group View</h4>
+                    </button>
+                </div>
+                <div id="groupview" class="card-body collapse show m-0 p-0">
+                    <div class="row m-0">
+                        <div class="col-2 m-0 pt-3 pb-3" style="background-color: rgba(0, 0, 0, 0.03); border-right: 1px solid rgba(0, 0, 0, 0.125)">
+                            <ul class="nav nav-pills flex-column pt-2 pb-2" aria-orientation="vertical">
+                                <li class="nav-item">
+                                    <a class="nav-link p-1 active" data-toggle="pill" href="#groupMapped" aria-selected="true">Mapped Rate</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link p-1" data-toggle="pill" href="#groupPBC">PBC Summary</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link p-1" data-toggle="pill" href="#groupPeaks">Peaks Summary</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-10 mb-5">
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <div class="container-fluid tab-pane fade show active p-auto" id="groupMapped">
+                                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2">
+                                            <h3>Mapped Rate Summary</h3>
+                                        </div>
+                                        <div>The raw reads for each sample were mapped to the reference genome using alignment software (see <span data-toggle="collapse" data-target="#overallInformation" style="color: #007bff; cursor: pointer;">Overall Information</span>).</div>
+                                        <div> The <b>mapped reads</b> represent the number of reads which successfully map to the genome, while the <b>uniquely mapped reads</b> represent the subset of <b>mapped reads</b> that map to only one location in the genome.</div>
+                                        <div> In most cases, anything above <b>60% uniquely mapped</b> reads is considered as good quality data. Contamination, low quality sequencing data, or poor library construction could be the reasons for low quality data.</div>
+                                        <br />
+                                        <div id="groupMappedInformation">
+                                            <img src="{groupMappedFigure}" width="500" height="500" class="float-left">
+                                        </div>
+                                    </div>
+                                    <div class="container-fluid tab-pane fade p-auto" id="groupPBC">
+                                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2">
+                                            <h3>PCR Bottleneck Coefficient (PBC) Summary</h3>
+                                        </div>
+                                        <div><b>PBC</b> is a common measure used for determining sample complexity.</div>
+                                        <div><b>4 million reads</b> are downsampled from the alignment result.</div>
+                                        <div>These downsampled results are used to calculate the PBC score. PBC score is calculated by the formula: <b>N1/Nd</b>, where <b>N1</b> = number of unique region locations with only one read and <b>Nd</b> = number of unique region locations. Typically, good quality samples have a <b>PBC score >= 0.90</b>.</div>
+                                        <br />
+                                        <div id="groupPBCInformation">
+                                            <img src="{groupPBCFigure}" width="500" height="500" class="float-left">
+                                        </div>
+                                    </div>
+                                    <div class="container-fluid tab-pane fade p-auto" id="groupPeaks">
+                                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2">
+                                            <h3>Peaks Summary</h3>
+                                        </div>
+                                        <div>Peak calling is a computational method used to identify areas in a genome that have been enriched with aligned reads as a consequence of performing a ChIP-seq or ATAC-seq experiment.</div>
+                                        <div>The Peaks Fold Change figure plots the peaks number at different fold change among each replicate in Chips run.</div>
+                                        <div>The peaks result was called by <strong>MACS2</strong>. Typically, a good ChIP enrichment should include <strong>more than 500</strong> 10 fold change peaks.</div>
+                                        <br />
+                                        <div id="groupPeaksInformation">
+                                            <img src="{groupPeaksFigure}" width="500" height="500" class="float-left">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div id="thirdCard" class="card text-left mr-4 ml-4 mt-3 mb-3">
+                <div class="card-header">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <div class="col-2 m-0 p-0">
+                                <button class="btn m-0 p-0" data-toggle="collapse" data-target="#sampleview" aria-expanded="true" aria-controls="sampleView">
+                                    <h4 class="m-0 p-0">Sample View</h4>
+                                </button></div>
+                            <div class="col-2">
+                                <select class="selectpicker" data-live-search="true" id="SampleSelector" onchange="update_current_run()">
+                                    <option>{Run1}</option>
+                                    <option>{Run2}</option>
+                                    <option>{Run3}</option>
+                                </select></div>
+                            <div class="col-8">
+                                Now you are checking run: <strong id="CurrentRun">{Run1}</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="sampleview" class="card-body collapse show m-0 p-0">
+                    <div class="row m-0">
+                        <div class="col-2" style="background-color: rgba(0, 0, 0, 0.03); border-right: 1px solid rgba(0, 0, 0, 0.125)">
+                            <ul class="nav nav-pills flex-column pt-2 pb-2" aria-orientation="vertical">
+                                <strong class="mt-3 mb-1" style="font-size: 1rem">Quality Control</strong>
+                                <li class="nav-item">
+                                    <a class="nav-link p-1 active" data-toggle="pill" href="#Mapped" aria-selected="true" onclick="update_Mapped_information()">Mapped Rate</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link p-1" data-toggle="pill" href="#GC" onclick="update_GC_information()">GC Content</a>
+                                </li>
+                                <li class="nav-item" id="FragmentsTab">
+                                    <a class="nav-link p-1" data-toggle="pill" href="#Fragments" onclick="update_Fragments_information()">Fragments Length</a>
+                                </li>
+                                <li class="nav-item" id="ContamTab">
+                                    <a class="nav-link p-1" data-toggle="pill" href="#Contam" onclick="update_Contam_information()">Contamination</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link p-1" data-toggle="pill" href="#PBC" onclick="update_PBC_information()">PBC</a>
+                                </li>
+                                <li class="nav-item" id="FRiPTab">
+                                    <a class="nav-link p-1" data-toggle="pill" href="#FRiP" onclick="update_FRiP_information()">FRiP</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link p-1" data-toggle="pill" href="#Conserv" onclick="update_Conserv_information()">Conservation</a>
+                                </li>
+                                <strong class="mt-3 mb-1" style="font-size: 1rem">Results</strong>
+                                <li class="nav-item">
+                                    <a class="nav-link p-1" data-toggle="pill" href="#Peaks" onclick="update_Peaks_information()">Peaks Summary</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link p-1" data-toggle="pill" href="#Targets" onclick="update_Targets_information()">Targets</a>
+                                </li>
+                                <li class="nav-item" id="MotifsTab">
+                                    <a class="nav-link p-1" data-toggle="pill" href="#Motifs" onclick="update_Motifs_information()">Motifs</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-10 m-0">
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <div class="container-fluid tab-pane fade show active p-auto" id="Mapped">
+                                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2">
+                                            <h3 id="Mapped">Mapped Rate</h3>
+                                        </div>
+                                        <div>The raw reads for each sample were mapped to the reference genome using alignment software (see <span data-toggle="collapse" data-target="#overallInformation" style="color: #007bff; cursor: pointer;">Overall Information</span>).</div>
+                                        <div> The <b>mapped reads</b> represent the number of reads which successfully map to the genome, while the <b>uniquely mapped reads</b> represent the subset of <b>mapped reads</b> that map to only one location in the genome.</div>
+                                        <div> In most cases, anything above <b>60% uniquely mapped</b> reads is considered as good quality data. Contamination, low quality sequencing data, or poor library construction could be the reasons for low quality data.</div>
+                                        <div class="container-fluid m-0 p-0" id="MappedInformation">
+                                            <div class="container-fluid mb-3">
+                                                <h4>{SampleName}</h4>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <table class="table table-bordered table-striped" style="font-size: 15px">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row">Total reads</th>
+                                                                    <td>{TotalReads}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Mapped reads</th>
+                                                                    <td>{MappedReads}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Uniquely mapped reads</th>
+                                                                    <td>{UniquelyMappedReads}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Mapped rate</th>
+                                                                    <td>{MappedRate}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Uniquely mapped rate</th>
+                                                                    <td>{UniquelyMappedRate}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <a href="{MappedFigure}"><img src="{MappedFigure}" width="450" height="235" class="float-left"></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="container-fluid tab-pane fade p-auto" id="GC">
+                                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2">
+                                            <h3>GC Content</h3>
+                                        </div>
+                                        <div>The median value/percent of <b>GC content</b> sample is displayed in the table below. </div>
+                                        <div>The distribution of these values is also plotted with the 50% line mark shown (GC distribution). </div>
+                                        <div>Typically, for <b>human samples</b>, the modal value should be roughly around the <b>42% mark</b> (ref). </div>
+                                        <br />
+                                        <div class="container-fluid m-0 p-0" id="GCInformation">
+                                            <div class="container-fluid mb-3">
+                                                <h4>{SampleName}</h4>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <h5>GC Median</h5>
+                                                        <table class="table table-bordered table-striped" style="font-size: 15px">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row">Median Quality</th>
+                                                                    <td>{MedianQuality}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">GC Median</th>
+                                                                    <td>{GCMedian}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h5>GC Distribution</h5>
+                                                        <a href="{GCFigure}"><img src="{GCFigure}" width="235" height="235" class="float-left"></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="container-fluid tab-pane fade p-auto" id="Fragments">
+                                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2">
+                                            <h3>Fragments Length Distribution</h3>
+                                        </div>
+                                        <div>Here shows the paired-end sample fragment size distribution.</div>
+                                        <br />
+                                        <div class="container-fluid m-0 p-0" id="FragmentsInformation">
+                                            <div class="container-fluid mb-3">
+                                                <h4>{SampleName}</h4>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <a href="{FragmentFigure}"><img src="{FragmentFigure}" width="400" height="300" class="float-left"></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="container-fluid tab-pane fade p-auto" id="Contam">
+                                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2">
+                                            <h3>Contamination</h3>
+                                        </div>
+                                        <div>A sub-sample of 100,000 reads from the raw file is taken and aligned against each species defined in the contamination panel (see <span data-toggle="collapse" data-target="#overallInformation" style="color: #007bff; cursor: pointer;">Overall Information</span>). </div>
+                                        <div>The reported values for each species represent the percent of 100,000 reads that map to that species' reference genome.</div>
+                                        <br />
+                                        <div class="container-fluid m-0 p-0" id="ContamInformation">
+                                            <div class="container-fluid mb-3">
+                                                <h4>{SampleName}</h4>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <table class="table table-bordered table-striped" style="font-size: 15px">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Species</th>
+                                                                    <th>Contamination Percentage</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row">Species1</th>
+                                                                    <td>{ContaminationSpecies1}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Species2</th>
+                                                                    <td>{ContaminationSpecies2}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Species3</th>
+                                                                    <td>{ContaminationSpecies3}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="container-fluid tab-pane fade p-auto" id="PBC">
+                                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2">
+                                            <h3>PCR Bottleneck Coefficient (PBC)</h3>
+                                        </div>
+                                        <div><b>PBC</b> is a common measure used for determining sample complexity.</div>
+                                        <div><b>4 million reads</b> are downsampled from the alignment result.</div>
+                                        <div>These downsampled results are used to calculate the PBC score. PBC score is calculated by the formula: <b>N1/Nd</b>, where <b>N1</b> = number of unique region locations with only one read and <b>Nd</b> = number of unique region locations. Typically, good quality samples have a <b>PBC score >= 0.90</b>.</div>
+                                        <br />
+                                        <div class="container-fluid m-0 p-0" id="PBCInformation">
+                                            <div class="container-fluid mb-3">
+                                                <h4>{SampleName}</h4>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <table class="table table-bordered table-striped" style="font-size: 15px">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row">N1</th>
+                                                                    <td>{N1Score}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Nd</th>
+                                                                    <td>{NdScore}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">PBC</th>
+                                                                    <td>{PBCScore}</td>
+                                                                </tr>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="container-fluid tab-pane fade p-auto" id="FRiP">
+                                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2">
+                                            <h3>Fraction of Reads in Peaks (FRiP)</h3>
+                                        </div>
+                                        <div>4 million reads are downsampled from the raw files and aligned to the genome. </div>
+                                        <div>MACS tool is used to call peaks on the alignment results. </div>
+                                        <div><b>FRiP score</b> is calculated by taking the fraction of 4 million reads that fall within a defined peak-region.</div>
+                                        <br />
+                                        <div class="container-fluid m-0 p-0" id="FRiPInformation">
+                                            <div class="container-fluid mb-3">
+                                                <h4>{RunRepName}</h4>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <table class="table table-bordered table-striped" style="font-size: 15px">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row">Reads In Peaks</th>
+                                                                    <td>{ReadsInPeaks}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">FRiP</th>
+                                                                    <td>{FRiP}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <a href="{FRiPFigure}"><img src="{FRiPFigure}" width="400" height="200" class="float-left"></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="container-fluid tab-pane fade p-auto" id="Conserv">
+                                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2">
+                                            <h3>Conservation</h3>
+                                        </div>
+                                        <div>The <b>conservation plots</b> of <b>transcription factor</b> (ChIP-seq) runs typically show a <b>high focal point around peak summits</b> (characterized as "needle points"), while histone runs typically show a <b>biomodal peaks</b> (i.e. "shoulders"). </div>
+                                        <div>Deviations from these typical results usually indicates problems with the ChIP-seq run (e.g. sample contamination, alignment problems, etc.) </div>
+                                        <br />
+                                        <div class="container-fluid m-0 p-0" id="ConservInformation">
+                                            <div class="container-fluid mb-3">
+                                                <h4>{RunRepName}</h4>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <a href="{ConservationFigure}"><img src="{ConservationFigure}" width="400" height="400" class="float-left"></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="container-fluid tab-pane fade p-auto" id="Peaks">
+                                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2">
+                                            <h3>Peaks Summary</h3>
+                                        </div>
+                                        <div>Peak calling is a computational method used to identify areas in a genome that have been enriched with aligned reads as a consequence of performing a ChIP-seq or ATAC-seq experiment.</div>
+                                        <div>The Peaks Summary table not only shows the statisics represented in the "Peak FoldChange" plots, but also give other statistics such as <b>the number of DHS peaks, and peak characterization.</b></div>
+                                        <div><b>DNAse hyper-sensitive (DHS)</b> sites have been shown to be very active regions of the genome (ref). Using a list of known DHS regions (specific to each species), the DHS peaks represent the number of 4M downsampled peaks that intersect with DHS peaks.</div>
+                                        <div>The fraction of peaks that fall in <b>promoter, exon, intron, and intergenic regions are also shown.</b></div>
+                                        <br />
+                                        <div class="container-fluid m-0 p-0" id="PeaksInformation">
+                                            <div class="container-fluid mb-3">
+                                                <div class="row align-items-center mb-3">
+                                                    <h4 class="col-4 mb-0 p-0">{RunRepName}</h4>
+                                                    <a class="col-3 m-0 p-0" href="">Download this peaks file</a>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <table class="table table-bordered table-striped" style="font-size: 15px">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row">Total Peaks</th>
+                                                                    <td>{TotalPeaks}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">>10 Fold Change Peaks</th>
+                                                                    <td>{10FoldChangePeaks}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">>20 Fold Change Peaks</th>
+                                                                    <td>{20FoldChangePeaks}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">DHS Peaks</th>
+                                                                    <td>{DHSPeaks}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Peaks In Promoter</th>
+                                                                    <td>{PromoterPeaks}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Peaks In Exon</th>
+                                                                    <td>{ExonPeaks}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Peaks In Intron</th>
+                                                                    <td>{IntronPeaks}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Peaks In Intergenic</th>
+                                                                    <td>{IntergenicPeaks}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <a href="{Peaks}"><img src="{Peaks}" width="400" height="377" class="float-left"></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="container-fluid tab-pane fade p-auto" id="Targets">
+                                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2">
+                                            <h3>Targets</h3>
+                                        </div>
+                                        <div><b>Regulatory potential (RP) score</b> has been demonstrated as an efficient method to find putative targets based on ChIP-seq peaks and reflect the regulation likelihood. </div>
+                                        <div>Chips used all of peaks to get putative targets result by Cistrome-GO regulatory potential score formula. </div>
+                                        <div>Here only shows the <b>top 2000 genes</b>(ordered by scores) after RP calculation in the following table. The full results could be downloaded below as well.</div>
+                                        <br />
+                                        <div class="container-fluid m-0 p-0" id="TargetsInformation">
+                                            <div class="container-fluid mb-3">
+                                                <div class="row align-items-center mb-3">
+                                                    <h4 class="col-4 mb-0 p-0">{RunRepName}</h4>
+                                                    <a class="col-3 m-0 p-0" href="">Download this putative targets file</a>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <table class="table table-bordered table-striped rpTable" style="font-size: 15px">
+                                                            <thead class="thead">
+                                                                <th scope="col" style="vertical-align: middle">Gene</th>
+                                                                <th scope="col" style="vertical-align: middle">Score</th>
+                                                                <th scope="col" style="vertical-align: middle">Coordinate</th>
+                                                            </thead>
+                                                            <tbody style="font-size: 0.9rem">
+                                                                <tr>
+                                                                    <td>{Gene1}</td>
+                                                                    <td>{Score1}</td>
+                                                                    <td>{Coordinate1}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="container-fluid tab-pane fade p-auto" id="Motifs">
+                                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2">
+                                            <h3>Motifs</h3>
+                                        </div>
+                                        <div>The top 5000 most significant peak summits (ranked by MACS pvalue score) are used. </div>
+                                        <div>Motifs were weighted by appearing more frequently at the stronger ChIP-seq peaks and at the center of peaks. Large absolute z-scores of the motifs found from ChIP-seq peaks indicate good motif enrichment and high ChIP-seq data quality.</div>
+                                        <div>With such motif enrichment results, you can better understand the binding pattern of the factor.</div>
+                                        <br />
+                                        <div class="container-fluid m-0 p-0" id="MotifInformation">
+                                            <div class="container-fluid mb-3">
+                                                <h4>{RunRepName}</h4>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <iframe src="{MotifHtml}" width="850" height="600"></iframe>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <nav class="navbar d-flex flex-row flex-md-nowrap fixed-bottom navbar-dark" style="background-color:#1E284A">
+        <div class="bd-highlight">
+         <!--    <a href="https://cimac-network.org/" class="navbar-brand pt-0 pb-0 mr-0" style="background-color: #f0f0f0; height: 45px; width: 120px">
+                <img src="https://i1.wp.com/cimac-network.org/wp-content/uploads/2018/06/version-3.png" height="45" width="120"> </a>
+            <a href="http://liulab.dfci.harvard.edu/" class="navbar-brand pt-0 pb-0 mt-1 ml-2" style="background-color: rgba(0, 0, 0, 0);height: 45px; width: 60px">
+                <img src="http://liulab.dfci.harvard.edu/WEBSITE/images/Global/logofinal.png" height="46" width="58"> </a> -->
+        </div>
+        <span class="navbar-text" style="font-size: 13px">Copyright @ 2019 <a href="http://liulab.dfci.harvard.edu/">Liu lab</a></span>
+    </nav>
+</body>
+<!-- a function to update variables -->
+<script type="text/javascript">
+var Chips_result = { RESULT_DICT };
+
+$("#ChipsVersion").attr("href", "https://bitbucket.org/plumbers/cidc_chips/commits/" + Chips_result["Config"]["ChipsVersion"]);
+$("#ChipsVersion").text(Chips_result["Config"]["ChipsVersion"]);
+$("#ResultsPath").text(Chips_result["Config"]["ResultsPath"]);
+$("#AssemblyVersion").text(Chips_result["Config"]["AssemblyVersion"]);
+$("#UsingSentieon").text(Chips_result["Config"]["UsingSentieon"]);
+$("#Aligner").text(Chips_result["Config"]["Aligner"]);
+$("#PeaksCaller").text(Chips_result["Config"]["PeaksCaller"]);
+$("#Cutoff").text(Chips_result["Config"]["Cutoff"]);
+$("#MotifFinder").text(Chips_result["Config"]["MotifFinder"]);
+$("#ContaminationPanel").text(Chips_result["Config"]["ContaminationPanel"]);
+$("#CNVAnalysis").text(Chips_result["Config"]["CNVAnalysis"]);
+$("#RunsInformation").text(Chips_result["Config"]["RunsInformation"]);
+$("#groupMappedInformation").html('<img src="{groupMappedFigure}" width="500" height="500" class="float-left">'.replace("{groupMappedFigure}", Chips_result["Group"]["Mapping"]));
+$("#groupPBCInformation").html('<img src="' + Chips_result["Group"]["PBC"] + '" width="500" height="500" class="float-left">');
+$("#groupPeaksInformation").html('<img src="' + Chips_result["Group"]["Peaks"] + '" width="500" height="500" class="float-left">');
+
+$.each(Chips_result["Config"]["Runlist"], function(i, item) {
+    if (i == 0) {
+        $("#SampleSelector").html("<option selected='selected'>" + item + "</option>");
+    } else {
+        $("#SampleSelector").append("<option>" + item + "</option>");
+    };
+});
+
+var cri = document.getElementById('SampleSelector').options[document.getElementById('SampleSelector').selectedIndex].value;
+$("#CurrentRun").text(cri);
+update_Mapped_information();
+if (JSON.stringify(Chips_result["Fragments"][cri]) == '{}') {
+    $("#FragmentsTab").css('display', 'none')
+} else {
+    $("#FragmentsTab").css('display', 'block')
+};
+if (JSON.stringify(Chips_result["Motifs"]) == '{}') {
+    $("#MotifsTab").css('display', 'none')
+} else {
+    $("#MotifsTab").css('display', 'block')
+};
+if (JSON.stringify(Chips_result["FRiP"]) == '{}') {
+    $("#FRiPTab").css('display', 'none')
+} else {
+    $("#FRiPTab").css('display', 'block')
+};
+if (JSON.stringify(Chips_result["Contam"]) == '{}') {
+    $("#ContamTab").css('display', 'none')
+} else {
+    $("#ContamTab").css('display', 'block')
+};
+
+
+function update_current_run() {
+    var cri = document.getElementById('SampleSelector').options[document.getElementById('SampleSelector').selectedIndex].value;
+    $("#CurrentRun").text(cri);
+    if (JSON.stringify(Chips_result["Fragments"][cri]) == '{}') {
+        $("#FragmentsTab").css('display', 'none')
+    } else {
+        $("#FragmentsTab").css('display', 'block')
+    };
+    update_Mapped_information();
+    update_GC_information();
+    update_Fragments_information();
+    update_Contam_information();
+    update_PBC_information();
+    update_FRiP_information();
+    update_Conserv_information();
+    update_Peaks_information();
+    update_Targets_information();
+    update_Motifs_information();
+};
+
+function get_current_run() {
+    var cr = document.getElementById('CurrentRun').innerText;
+    return cr
+};
+
+function update_Mapped_information() {
+    $.each(Object.keys(Chips_result["Mapped"][get_current_run()]), function(i, item) {
+        var html_content = '<div class="container-fluid mb-3"><h4>' + item + '</h4><div class="row"><div class="col-md-6"><table class="table table-bordered table-striped" style="font-size: 15px"><tbody><tr><th scope="row">Total reads</th><td>' + Chips_result["Mapped"][get_current_run()][item]['TotalReads'] + '</td></tr><tr><th scope="row">Mapped reads</th><td>' + Chips_result["Mapped"][get_current_run()][item]['MappedReads'] + '</td></tr><tr><th scope="row">Uniquely mapped reads</th><td>' + Chips_result["Mapped"][get_current_run()][item]['UniquelyMappedReads'] + '</td></tr><tr><th scope="row">Mapped rate</th><td>' + Chips_result["Mapped"][get_current_run()][item]['MappedRate'] + '</td></tr><tr><th scope="row">Uniquely mapped rate</th><td>' + Chips_result["Mapped"][get_current_run()][item]['UniquelyMappedRate'] + '</td></tr></tbody></table></div><div class="col-md-6"><a href=' + Chips_result["Mapped"][get_current_run()][item]['MappedFigure'] + '><img src=' + Chips_result["Mapped"][get_current_run()][item]['MappedFigure'] + ' width="450" height="235" class="float-left"></a></div></div></div>';
+        if (i == 0) {
+            $("#MappedInformation").html(html_content);
+        } else {
+            $("#MappedInformation").append(html_content);
+        };
+    });
+};
+
+function update_GC_information() {
+    $.each(Object.keys(Chips_result["GC"][get_current_run()]), function(i, item) {
+        var html_content = '<div class="container-fluid mb-3"><h4>' + item + '</h4><div class="row"><div class="col-md-6"><h5>GC Median</h5><table class="table table-bordered table-striped" style="font-size: 15px"><tbody><tr><th scope="row">Median Quality</th><td>' + Chips_result["GC"][get_current_run()][item]['MedianQuality'] + '</td></tr><tr><th scope="row">GC Median</th><td>' + Chips_result["GC"][get_current_run()][item]['GCMedian'] + '</td></tr></tbody></table></div><div class="col-md-6"><h5>GC Distribution</h5><a href=' + Chips_result["GC"][get_current_run()][item]['GCFigure'] + '><img src=' + Chips_result["GC"][get_current_run()][item]['GCFigure'] + ' width="235" height="235" class="float-left"></a></div></div></div>';
+        if (i == 0) {
+            $("#GCInformation").html(html_content);
+        } else {
+            $("#GCInformation").append(html_content);
+        };
+    });
+
+};
+
+function update_Fragments_information() {
+    $.each(Object.keys(Chips_result["Fragments"][get_current_run()]), function(i, item) {
+        var html_content = '<div class="container-fluid mb-3"><h4>' + item + '</h4><div class="row"><div class="col-md-6"><a href=' + Chips_result["Fragments"][get_current_run()][item]['FragmentFigure'] + '><img src=' + Chips_result["Fragments"][get_current_run()][item]['FragmentFigure'] + ' width="400" height="400" class="float-left"></a></div></div></div>';
+        if (i == 0) {
+            $("#FragmentsInformation").html(html_content);
+        } else {
+            $("#FragmentsInformation").append(html_content);
+        };
+    });
+
+};
+
+function update_Contam_information() {
+    $.each(Object.keys(Chips_result["Contam"][get_current_run()]), function(i, item) {
+        var contam_table = ''
+        $.each(Object.keys(Chips_result["Contam"][get_current_run()][item]), function(c, spe) {
+            contam_table = contam_table + '<tr><th scope="row">' + spe + '</th><td>' + Chips_result["Contam"][get_current_run()][item][spe] + '</td></tr>';
+        });
+        var html_content = '<div class="container-fluid mb-3"><h4>' + item + '</h4><div class="row"><div class="col-md-6"><table class="table table-bordered table-striped" style="font-size: 15px"><thead><tr><th>Species</th><th>Contamination Percentage</th></tr></thead><tbody>' + contam_table + '</tbody></table></div></div>';
+        if (i == 0) {
+            $("#ContamInformation").html(html_content);
+        } else {
+            $("#ContamInformation").append(html_content);
+        };
+    });
+
+};
+
+function update_PBC_information() {
+    $.each(Object.keys(Chips_result["PBC"][get_current_run()]), function(i, item) {
+        var html_content = '<div class="container-fluid mb-3"><h4>' + item + '</h4><div class="row"><div class="col-md-6"><table class="table table-bordered table-striped" style="font-size: 15px"><tbody><tr><th scope="row">N1</th><td>' + Chips_result["PBC"][get_current_run()][item]['N1Score'] + '</td></tr><tr><th scope="row">Nd</th><td>' + Chips_result["PBC"][get_current_run()][item]['NdScore'] + '</td></tr><tr><th scope="row">PBC</th><td>' + Chips_result["PBC"][get_current_run()][item]['PBCScore'] + '</td></tr></tr></tbody></table></div></div></div>';
+        if (i == 0) {
+            $("#PBCInformation").html(html_content);
+        } else {
+            $("#PBCInformation").append(html_content);
+        };
+    });
+
+};
+
+function update_FRiP_information() {
+    $.each(Object.keys(Chips_result["FRiP"][get_current_run()]), function(i, item) {
+        var html_content = '<div class="container-fluid mb-3"><h4>' + item + '</h4><div class="row"><div class="col-md-6"><table class="table table-bordered table-striped" style="font-size: 15px"><tbody><tr><th scope="row">Reads In Peaks</th><td>' + Chips_result["FRiP"][get_current_run()][item]['ReadsInPeaks'] + '</td></tr><tr><th scope="row">FRiP</th><td>' + Chips_result["FRiP"][get_current_run()][item]['FRiP'] + '</td></tr></tbody></table></div><div class="col-md-6"><a href=' + Chips_result["FRiP"][get_current_run()][item]['FRiPFigure'] + '><img src=' + Chips_result["FRiP"][get_current_run()][item]['FRiPFigure'] + ' width="400" height="200" class="float-left"></a></div></div></div>';
+        if (i == 0) {
+            $("#FRiPInformation").html(html_content);
+        } else {
+            $("#FRiPInformation").append(html_content);
+        };
+    });
+
+};
+
+function update_Conserv_information() {
+    $.each(Object.keys(Chips_result["Conserv"][get_current_run()]), function(i, item) {
+        var html_content = '<div class="container-fluid mb-3"><h4>' + item + '</h4><div class="row"><div class="col-md-6"><a href=' + Chips_result["Conserv"][get_current_run()][item]['ConservationFigure'] + '><img src=' + Chips_result["Conserv"][get_current_run()][item]['ConservationFigure'] + ' width="400" height="400" class="float-left"></a></div></div></div>';
+        if (i == 0) {
+            $("#ConservInformation").html(html_content);
+        } else {
+            $("#ConservInformation").append(html_content);
+        };
+    });
+
+};
+
+function update_Peaks_information() {
+    $.each(Object.keys(Chips_result["Peaks"][get_current_run()]), function(i, item) {
+        if (Chips_result["Peaks"][get_current_run()][item]['DHSPeaks'] != '') {
+            var dhs_html = '<tr><th scope="row">DHS Peaks</th><td>' + Chips_result["Peaks"][get_current_run()][item]['DHSPeaks'] + '</td></tr>'
+        } else {
+            var dhs_html = ''
+        };
+        var html_content = '<div class="container-fluid mb-3"><div class="row align-items-center mb-3"><h4 class="col-6 mb-0 p-0">' + item + '</h4><a class="col-6 m-auto p-auto text-left" href="' + Chips_result["Peaks"][get_current_run()][item]['PeaksFile'] + '">Download file</a></div><div class="row"><div class="col-md-6"><table class="table table-bordered table-striped" style="font-size: 15px"><tbody><tr><th scope="row">Total Peaks</th><td>' + Chips_result["Peaks"][get_current_run()][item]['TotalPeaks'] + '</td></tr><tr><th scope="row">>10 Fold Change Peaks</th><td>' + Chips_result["Peaks"][get_current_run()][item]['10FoldChangePeaks'] + '</td></tr><tr><th scope="row">>20 Fold Change Peaks</th><td>' + Chips_result["Peaks"][get_current_run()][item]['20FoldChangePeaks'] + '</td></tr>' + dhs_html + '<tr><th scope="row">Peaks In Promoter</th><td>' + Chips_result["Peaks"][get_current_run()][item]['PromoterPeaks'] + '</td></tr><tr><th scope="row">Peaks In Exon</th><td>' + Chips_result["Peaks"][get_current_run()][item]['ExonPeaks'] + '</td></tr><tr><th scope="row">Peaks In Intron</th><td>' + Chips_result["Peaks"][get_current_run()][item]['IntronPeaks'] + '</td></tr><tr><th scope="row">Peaks In Intergenic</th><td>' + Chips_result["Peaks"][get_current_run()][item]['IntergenicPeaks'] + '</td></tr></tbody></table></div><div class="col-md-6"><a href=' + Chips_result["Peaks"][get_current_run()][item]['PeaksFigure'] + '><img src=' + Chips_result["Peaks"][get_current_run()][item]['PeaksFigure'] + ' width="400" height="377" class="float-left"></a></div></div></div>';
+        if (i == 0) {
+            $("#PeaksInformation").html(html_content);
+        } else {
+            $("#PeaksInformation").append(html_content);
+        };
+    });
+
+};
+
+function update_Targets_information() {
+    $.each(Object.keys(Chips_result["Targets"][get_current_run()]), function(i, item) {
+        var html_content = '<div class="container-fluid mb-3"><div class="row align-items-center mb-3"><h4 class="col-6 mb-0 p-0">' + item + '</h4><a class="col-6 m-auto p-auto text-right" href="' + Chips_result["Targets"][get_current_run()][item]['TargetsFile'] + '">Download file</a></div><div class="row"><div class="col-md-12"><table class="table table-bordered table-striped rpTable" style="font-size: 15px"><thead class="thead"><th scope="col" style="vertical-align: middle">Gene</th><th scope="col" style="vertical-align: middle">Score</th><th scope="col" style="vertical-align: middle">Coordinate</th></thead><tbody style="font-size: 0.9rem">' + Chips_result["Targets"][get_current_run()][item]['TargetsTable'] + '</tbody></table></div></div></div>';
+        if (i == 0) {
+            $("#TargetsInformation").html(html_content);
+        } else {
+            $("#TargetsInformation").append(html_content);
+        };
+    });
+    $('.rpTable').DataTable({
+        "order": [
+            [1, "desc"]
+        ],
+        initComplete: function() {
+            var api = this.api();
+            api.columns().indexes().flatten().each(function(i) {
+                var column = api.column(i);
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo($(column.footer()).empty())
+                    .on('change', function() {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+                        column
+                            .search(val ? '^' + val + '$' : '', true, false)
+                            .draw();
+                    });
+                column.data().unique().sort().each(function(d, j) {
+                    select.append('<option value="' + d + '">' + d + '</option>')
+                });
+            });
+        }
+    });
+
+};
+
+function update_Motifs_information() {
+    $.each(Object.keys(Chips_result["Motifs"][get_current_run()]), function(i, item) {
+        var html_content = '<div class="container-fluid mb-3"><h4>' + item + '</h4><div class="row"><div class="col-12"><iframe src="' + Chips_result["Motifs"][get_current_run()][item]['MotifHtml'] + '" width="850" height="600"></iframe></div></div></div>';
+        if (i == 0) {
+            $("#MotifInformation").html(html_content);
+        } else {
+            $("#MotifInformation").append(html_content);
+        };
+    });
+
+};
+</script>
+<!-- a function to set searching box -->
+<script type="text/javascript">
+$('.rpTable').DataTable({
+    "order": [
+        [1, "desc"]
+    ],
+    initComplete: function() {
+        var api = this.api();
+        api.columns().indexes().flatten().each(function(i) {
+            var column = api.column(i);
+            var select = $('<select><option value=""></option></select>')
+                .appendTo($(column.footer()).empty())
+                .on('change', function() {
+                    var val = $.fn.dataTable.util.escapeRegex(
+                        $(this).val()
+                    );
+                    column
+                        .search(val ? '^' + val + '$' : '', true, false)
+                        .draw();
+                });
+            column.data().unique().sort().each(function(d, j) {
+                select.append('<option value="' + d + '">' + d + '</option>')
+            });
+        });
+    }
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.js-example-basic-single').select2({
+        theme: "bootstrap"
+    });
+});
+</script>
+<script type="text/javascript">
+function clean_formatted_data(str) {
+    return parseFloat(str.replace(/([%,$,\,])+/g, ''));
+}
+
+function col_to_array(tbl_col, target) {
+    // Returns column `n` (zero indexed) in table id `target` as an array 
+    var colArray = $('.' + target + ' td:nth-child(' + tbl_col + ')').map(function() {
+        return clean_formatted_data($(this).text());
+    }).get();
+    return colArray;
+}
+//------ new schtuff ------------------------//
+function get_pos_of_max(col_data) {
+    return $.inArray(Math.max.apply(Math, col_data), col_data)
+}
+
+function generate_opacities(col_data, max) {
+    var opacity_array = [];
+    var increment = max / (col_data.length);
+    for (i = col_data.length; i >= 1; i--) {
+        opacity_array.push(i * increment / 100);
+    }
+    return opacity_array;
+}
+
+function process_col_best_performing(tbl_col, target) {
+    var col_data = col_to_array(tbl_col, target);
+    var opacity_array = generate_opacities(col_data, 50);
+    var row_count = col_data.length;
+    for (var i = 1; i <= row_count; i++) {
+        $('.' + target + ' tr:nth-child(' + (get_pos_of_max(col_data) + 1) + ') td:nth-child(' + tbl_col + ')').css('background', 'rgba(65,105,255,' + opacity_array[0] + ')');
+        col_data[get_pos_of_max(col_data)] = null;
+        opacity_array.splice(0, 1);
+    }
+}
+
+process_col_best_performing(5, 'rpTable');
+</script>
+
+</html>

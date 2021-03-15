@@ -1,0 +1,13 @@
+name: fastqc
+channels:
+- bioconda
+- conda-forge
+- defaults
+dependencies:
+- python>=3.5
+- fastqc
+- seqtk
+- bedtools>=2.25.0
+- r-ggplot2>=2.2.0
+- r-reshape2>=1.4.2
+- r>=3.4.1

@@ -1,0 +1,9 @@
+caption: 'The fraction of reads in peaks (FRIP) score is calculated after 4 million reads are downsampled from the raw files and aligned to the genome. The MACS tool is used to call peaks on the alignment results. FRIP score is then calculated as the fraction of 4 million reads that fall within a defined peak region.'
+plotly:
+  barmode: overlay
+  labels:
+    X: FRIP score (% of peaks)
+    value: FRIP score (% of peaks)
+  opacity: 1.0
+  orientation: h
+
