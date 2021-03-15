@@ -1,21 +1,17 @@
-# Chips- ChIP-seq analysis pipeline in snakemake
-
-# Introduction to Chips
-- relation to ChiLin
-- relation to viper
+# CHIPS (CHromatin enrIchment ProceSsor), an analysis pipeline in snakemake to streamline the processing of ChIP-seq, ATAC-seq, and DNase-seq data
 
 # Table of Contents
 
-# Installing Chips
-You will only need to install Chips once, either for your own use, or if you are a system administrator, for the entire system (see **Appendix C**).  In other words, you will only need to perform the steps described in this section only once.  
-NOTE: this section ends with **Using Chips** (below)
+# Installing CHIPS
+You will only need to install CHIPS once, either for your own use, or if you are a system administrator, for the entire system (see **Appendix C**).  In other words, you will only need to perform the steps described in this section only once.  
+NOTE: this section ends with **Using CHIPS** (below)
 
 ### Required software
 We assume that the following tools are already installed on your system and that you have some basic familiarity in using them:
 `git`
 `wget`
 ### Installing Miniconda
-Chips uses the [Conda](https://conda.io/docs/intro.html) packaging system to manage and install all of its required software packages.
+CHIPS uses the [Conda](https://conda.io/docs/intro.html) packaging system to manage and install all of its required software packages.
 To install miniconda:
 
 1. download the Miniconda installer:
@@ -44,7 +40,7 @@ To install miniconda:
     $ conda config --add channels conda-forge
     ```
 
-### Installing the Chips conda environments
+### Installing the CHIPS conda environments
 Conda environments are briefly explained [here](https://conda.io/docs/using/envs.html).  Briefly, if you are familiar with [Python Virtual Environments](http://python-guide-pt-br.readthedocs.io/en/latest/dev/virtualenvs/) or [Docker Containers](https://www.docker.com/what-container) then Conda environments should be a familiar concept.  
 
 If you are **not familiar** with these concepts, then a conda environment is simply a **self-contained package space that is composed of various packages.**  So for example, a **bioinformatics** conda space may include packages such as **R**, **samtools**, **bedtools**, etc.
@@ -106,12 +102,12 @@ Chips is dependent on conda environments, *chips*.
     ```
     $ perl ~/miniconda3/envs/chips/share/homer/.//configureHomer.pl -install mm9
     ```
-### Downloading the Chips static reference files
-Chips comes pre-packaged with static reference files (e.g. bwa index, refSeq tables, etc.) for hg38/hg19 and mm9/mm10.  You can download those files [ref_files](http://cistrome.org/~galib/ref_files.tar.gz). Many of these files are commonly used static reference files, but if you would like to use the files that you already have, **OR** if you are interested in sup then please see **Appendix E**.
+### Downloading the CHIPS static reference files
+CHIPS comes pre-packaged with static reference files (e.g. bwa index, refSeq tables, etc.) for hg38/hg19 and mm9/mm10.  You can download those files [ref_files](http://cistrome.org/~galib/ref_files.tar.gz). Many of these files are commonly used static reference files, but if you would like to use the files that you already have, **OR** if you are interested in sup then please see **Appendix E**.
 
 # Using CHIPs
-### Anatomy of a Chips project
-All work in Chips is done in a **PROJECT/** directory, which is simply a directory to contain a single Chips analysis run.  **PROJECT/** directories can be named anything (and they usually start with a simple mkdir command, e.g. mkdir chips_for_paper),  but what is CRITICAL about a **PROJECT/** directory is that you fill them with the following core components:
+### Anatomy of a CHIPS project
+All work in CHIPS is done in a **PROJECT/** directory, which is simply a directory to contain a single Chips analysis run.  **PROJECT/** directories can be named anything (and they usually start with a simple mkdir command, e.g. mkdir chips_for_paper),  but what is CRITICAL about a **PROJECT/** directory is that you fill them with the following core components:
 (We first lay out the directory structure and explain each element below)
 > PROJECT/  
 > ├── cidc_chips/  
@@ -129,7 +125,7 @@ The ref.yaml file is explained in **Appendix E**.
 
 After a successful **Chips** run, another 'analysis' folder is generated which contains all of the resulting output files.
 
-### Setting up a Chips project
+### Setting up a CHIPS project
 0. **Create Project Directory**
     As explained above, the **PROJECT** directory is simply a directory to contain an entire Chips run.  **It can be named anything, but for this section, we'll simply call it 'PROJECT'**  
     ```
@@ -147,7 +143,7 @@ After a successful **Chips** run, another 'analysis' folder is generated which c
     ```
     And in 'data', copy over or make symbolic links to your raw data files  
 
-2. **Clone CHIPs Repository**
+2. **Clone CHIPS Repository**
     In your PROJECT directory:  
     ```
     $ mv cidc_chips/ PROJECT/
@@ -198,7 +194,7 @@ After a successful **Chips** run, another 'analysis' folder is generated which c
     - linking to static refs.
     - copying ref.yaml
 
-### Running Chips
+### Running CHIPS
 
 1. Acitivate the environment
 
@@ -249,7 +245,7 @@ python setup.py install
 ```
 At last, type `MDSeqPos.py` to ensure MDSeqPos is installed and check the usage.
 
-### Appendix E: Generating static reference files for Chips
+### Appendix E: Generating static reference files for CHIPS
 - all of the required files  
 - using your own files
 - supporting something new
