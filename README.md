@@ -50,7 +50,7 @@ Chips is dependent on conda environments, *chips*.
 0. **clone the chips source code**:
 
     ```
-    git clone git@bitbucket.org:plumbers/cidc_chips.git
+    git clone https://github.com/liulab-dfci/CHIPS
     ```  
     ** NOTE: this command will create a directory called 'chips'.  After the next five steps, this directory can be safely deleted as we will explain how to *Setup a Chips Project** below. **
 
