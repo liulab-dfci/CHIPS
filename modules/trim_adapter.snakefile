@@ -76,7 +76,7 @@ rule trim_fastp:
             shell("fastp --thread {threads} --detect_adapter_for_pe --in1 {input[0]} --in2 {input[1]} --out1 {output.fq1} --out2 {output.fq2} -h {output.html} -j {output.json} > {log} 2>&1")
         else:
             shell("fastp --thread {threads} --in1 {input[0]} --out1 {output.fq1} -h {output.html} -j {output.json} > {log} 2>&1")
-            shell("touch{output.fq2}")
+            shell("touch {output.fq2}")
 
 
 
