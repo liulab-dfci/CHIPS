@@ -1,6 +1,6 @@
 # CHIPS (CHromatin enrIchment ProceSsor), an analysis pipeline in snakemake to streamline the processing of ChIP-seq, ATAC-seq, and DNase-seq data
 
-This is a mirror of the repo on bitbucket https://bitbucket.org/plumbers/cidc_chips/src/master/
+This is a mirror of the repo on bitbucket https://bitbucket.org/plumbers/CHIPS/src/master/
 
 # Table of Contents
 
@@ -60,7 +60,7 @@ Chips is dependent on conda environments, *chips*.
     After cloning the git repository, create the chips environment by doing this:
 
     ```
-    $ cd cidc_chips  
+    $ cd CHIPS  
     $ conda env create -f environment.yml -n chips
     ```
 
@@ -112,14 +112,14 @@ CHIPS comes pre-packaged with static reference files (e.g. bwa index, refSeq tab
 All work in CHIPS is done in a **PROJECT/** directory, which is simply a directory to contain a single Chips analysis run.  **PROJECT/** directories can be named anything (and they usually start with a simple mkdir command, e.g. mkdir chips_for_paper),  but what is CRITICAL about a **PROJECT/** directory is that you fill them with the following core components:
 (We first lay out the directory structure and explain each element below)
 > PROJECT/  
-> ├── cidc_chips/  
+> ├── CHIPS/  
 > ├── data/  - *optional*  
 > ├── config.yaml  
 > ├── metasheet.csv  
 > ├── ref.yaml -  ***only if you are using chips OTHER THAN hg19 and mm9***   
 > └── ref_files/
 
-The 'cidc_chips' directory contains all of the chips source code.  We'll explain how to download that directory below.  The 'data' directory is an optional directory that contains all of your raw data. It is optional because those paths __may__ be fully established in the config.yaml, __however__ it is best practice to gather your raw data within 'data' using [symbolic links](https://www.cyberciti.biz/faq/creating-soft-link-or-symbolic-link/).
+The 'CHIPS' directory contains all of the chips source code.  We'll explain how to download that directory below.  The 'data' directory is an optional directory that contains all of your raw data. It is optional because those paths __may__ be fully established in the config.yaml, __however__ it is best practice to gather your raw data within 'data' using [symbolic links](https://www.cyberciti.biz/faq/creating-soft-link-or-symbolic-link/).
 
 The *config.yaml* and *metasheet.csv* are configurations for your VIPER run (also explained below).
 
@@ -148,7 +148,7 @@ After a successful **Chips** run, another 'analysis' folder is generated which c
 2. **Clone CHIPS Repository**
     In your PROJECT directory:  
     ```
-    $ mv cidc_chips/ PROJECT/
+    $ mv CHIPS/ PROJECT/
     ```
 
 3. **Create config.yaml and metasheet.csv**
@@ -158,11 +158,11 @@ After a successful **Chips** run, another 'analysis' folder is generated which c
     In the PROJECT directory:
 
     ```
-    $ cp cidc_chips/config.yaml .
+    $ cp CHIPS/config.yaml .
     ```
 
     ```
-    $ cp cidc_chips/metasheet.csv .
+    $ cp CHIPS/metasheet.csv .
     ```
 
     b. **setup config.yaml**
@@ -192,7 +192,7 @@ After a successful **Chips** run, another 'analysis' folder is generated which c
 
 4. **Set Up Refs**
     - A pre-built [ref_files](http://cistrome.org/~galib/ref_files.tar.gz) can be downloaded from the link.
-    - makesure in config.yaml, ref: "cidc_chips/ref.yaml"
+    - makesure in config.yaml, ref: "CHIPS/ref.yaml"
     - linking to static refs.
     - copying ref.yaml
 
@@ -207,12 +207,12 @@ conda activate chips
 2. dry run
 
 ```
-$ snakemake -np  -s cidc_chips/chips.snakefile --rerun-incomplete
+$ snakemake -np  -s CHIPS/chips.snakefile --rerun-incomplete
 ```
 
 3. full run  
 ```
-$ nohup snakemake -s cidc_chips/chips.snakefile --rerun-incomplete -j 8 > run.out &
+$ nohup snakemake -s CHIPS/chips.snakefile --rerun-incomplete -j 8 > run.out &
 ```
 
 More information for using snakemake can be found [here](https://snakemake.readthedocs.io/en/stable/index.html).
