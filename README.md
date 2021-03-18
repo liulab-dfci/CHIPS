@@ -1,5 +1,7 @@
 # CHIPS (CHromatin enrIchment ProceSsor), an analysis pipeline in snakemake to streamline the processing of ChIP-seq, ATAC-seq, and DNase-seq data
 
+This is a mirror of the repo on bitbucket https://bitbucket.org/plumbers/cidc_chips/src/master/
+
 # Table of Contents
 
 # Installing CHIPS
