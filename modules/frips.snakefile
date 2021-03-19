@@ -252,7 +252,7 @@ rule frips_getSampleFragLength:
     input:
         output_path + "/align/{sample}/{sample}_unique.sorted.bam"
     params:
-        awk_cmd = """awk ' $1 <= 1000 && $1 > 0 '"""
+        awk_cmd = """awk '{if($9 <= 1000 && $9 > 0) print $9; else if ($9 == 0) print length($10);}' """
     message: "FRAG: get fragment sizes"
     log:output_path + "/logs/frips/{sample}.log"
     benchmark: output_path + "/Benchmark/{sample}_frips_getSampleFragLength.benchmark"
@@ -262,7 +262,7 @@ rule frips_getSampleFragLength:
         output_path + "/frag/{sample}/{sample}_frags.txt"
     shell:
         #GRAB out the 9th column, ensuring it's in 1-1000
-        "samtools view -@ {threads} {input} | cut -f 9 | {params.awk_cmd} > {output} " #2>>{log}"
+        "samtools view -@ {threads} {input} | {params.awk_cmd} > {output} "#2>>{log}"
 
 rule frips_makeFragPlot:
     """plot the fragment distribution:
