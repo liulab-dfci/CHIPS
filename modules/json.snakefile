@@ -100,7 +100,7 @@ rule json_conservation:
     message: "JSON: generate conservation json"
     # log: output_path + "/logs/json/{sample}.log"
     shell:
-        "cidc_chips/modules/scripts/json/json_conserv.py -i {input} -o {output.json} {params.basics} {params.factor} {params.TF} -r {wildcards.run}"
+        "CHIPS/modules/scripts/json/json_conserv.py -i {input} -o {output.json} {params.basics} {params.factor} {params.TF} -r {wildcards.run}"
 
 
 # rule json_comtamination:
@@ -113,7 +113,7 @@ rule json_conservation:
 #     message: "JSON: generate comtamination json"
 #     log: _logfile
 #     shell:
-#         "cidc_chips/modules/scripts/json/json_comtamination.py -i {input} -o {output} -I {wildcards.sample} -s {wildcards.sample}"
+#         "CHIPS/modules/scripts/json/json_comtamination.py -i {input} -o {output} -I {wildcards.sample} -s {wildcards.sample}"
 
 
 rule json_dhs:
@@ -124,7 +124,7 @@ rule json_dhs:
     message: "JSON: generate DHS json"
     # log: output_path + "/logs/json/{sample}.log"
     shell:
-        "cidc_chips/modules/scripts/json/json_dhs.py -i {input} -o {output}"
+        "CHIPS/modules/scripts/json/json_dhs.py -i {input} -o {output}"
 
 # rule json_velcro:
 #     input:
@@ -136,7 +136,7 @@ rule json_dhs:
 #     message: "JSON: generate velcro json"
     # log: output_path + "/logs/json/{sample}.log"
 #     shell:
-#         "cidc_chips/modules/scripts/json/json_velcro.py  "
+#         "CHIPS/modules/scripts/json/json_velcro.py  "
 
 rule json_enrichMeta:
     input:
@@ -153,7 +153,7 @@ rule json_enrichMeta:
     message: "JSON: generate meta enrichment json"
     # log: output_path + "/logs/json/{sample}.log"
     shell:
-        "cidc_chips/modules/scripts/json/json_enrich_meta.py -i {input.meta} -o {output} {params.mapped_files} -D {input.dhs} {params.has_dhs} -d {params.down} -r {run} {params.sample_name}"
+        "CHIPS/modules/scripts/json/json_enrich_meta.py -i {input.meta} -o {output} {params.mapped_files} -D {input.dhs} {params.has_dhs} -d {params.down} -r {run} {params.sample_name}"
 
 
 rule json_fastqc:
@@ -167,7 +167,7 @@ rule json_fastqc:
     message: "JSON: generate fastqc json"
     # log: output_path + "/logs/json/{sample}.log"
     shell:
-        "cidc_chips/modules/scripts/json/json_fastqc.py {params.fastqc_data} -o {output}{params.sample_name} -r {run}"
+        "CHIPS/modules/scripts/json/json_fastqc.py {params.fastqc_data} -o {output}{params.sample_name} -r {run}"
 
 
 rule json_frag:
@@ -182,7 +182,7 @@ rule json_frag:
     message: "JSON: generate frag json"
     # log: output_path + "/logs/json/{sample}.log"
     shell:
-        "cidc_chips/modules/scripts/json/json_frag.py -r {input} -o {output.json} -R {params.sd_R} {params.frag_tool} {params.sample_name}"
+        "CHIPS/modules/scripts/json/json_frag.py -r {input} -o {output.json} -R {params.sd_R} {params.frag_tool} {params.sample_name}"
 
 
 rule json_frip:
@@ -196,7 +196,7 @@ rule json_frip:
         sample_name = lambda wildcards: [" -s %s" % i for i in json_getSample(wildcards) if i] if json_getSample(wildcards) else "",
     # log: output_path + "/logs/json/{sample}.log"
     shell:
-        "cidc_chips/modules/scripts/json/json_frip.py {params.input_file} -o {output}{params.sample_name}"
+        "CHIPS/modules/scripts/json/json_frip.py {params.input_file} -o {output}{params.sample_name}"
 
 
 rule json_macs2:
@@ -207,7 +207,7 @@ rule json_macs2:
     message: "JSON: generate macs2 json"
     # log: output_path + "/logs/json/{sample}.log"
     shell:
-        "cidc_chips/modules/scripts/json/json_macs2.py -i {input} -o {output} -I {wildcards.run}"
+        "CHIPS/modules/scripts/json/json_macs2.py -i {input} -o {output} -I {wildcards.run}"
 
 
 rule json_macs2Rep:
@@ -220,7 +220,7 @@ rule json_macs2Rep:
     message: "JSON: generate macs2 rep json"
     # log: output_path + "/logs/json/{sample}.log"
     shell:
-        "cidc_chips/modules/scripts/json/json_macs2_rep.py -i {input} -o {output} {params.sample_name} "
+        "CHIPS/modules/scripts/json/json_macs2_rep.py -i {input} -o {output} {params.sample_name} "
 
 
 rule json_map:
@@ -233,7 +233,7 @@ rule json_map:
         input_file = lambda wildcards: [" -i " + output_path + "/align/%s/%s_mapping.txt" % (i,i) for i in json_getSample(wildcards) if i] if json_getSample(wildcards) else "",
     # log: output_path + "/logs/json/{sample}.log"
     shell:
-        "cidc_chips/modules/scripts/json/json_map.py{params.input_file} -o {output} "
+        "CHIPS/modules/scripts/json/json_map.py{params.input_file} -o {output} "
 
 
 rule json_meta:
@@ -244,7 +244,7 @@ rule json_meta:
     message: "JSON: generate meta json"
     # log: output_path + "/logs/json/{sample}.log"
     shell:
-        "cidc_chips/modules/scripts/json/json_meta.py -i {input} -o {output} -I {wildcards.run} "
+        "CHIPS/modules/scripts/json/json_meta.py -i {input} -o {output} -I {wildcards.run} "
 
 
 rule json_pbc:
@@ -257,7 +257,7 @@ rule json_pbc:
         input_file = lambda wildcards: [" -i " + output_path + "/frips/%s/%s_pbc.txt" % (i,i) for i in json_getSample(wildcards) if i] if json_getSample(wildcards) else "",
     # log: output_path + "/logs/json/{sample}.log"
     shell:
-        "cidc_chips/modules/scripts/json/json_pbc.py{params.input_file} -o {output}"
+        "CHIPS/modules/scripts/json/json_pbc.py{params.input_file} -o {output}"
 
 rule json_seqpos:
     input:
@@ -269,7 +269,7 @@ rule json_seqpos:
         prefix = lambda wildcards: output_path + "/motif/%s/results/seqLogo/" % json_getRunAndRep(wildcards)
     # log: output_path + "/logs/json/{sample}.log"
     shell:
-        "cidc_chips/modules/scripts/json/json_seqpos.py -i {input} -o {output} -p {params.prefix}"
+        "CHIPS/modules/scripts/json/json_seqpos.py -i {input} -o {output} -p {params.prefix}"
 # rule json_rep:
 #     input:
         
@@ -278,6 +278,6 @@ rule json_seqpos:
 #     message: "JSON: generate rep json"
 #     log: output_path + "/logs/json/{sample}.log"
 #     shell:
-#         "cidc_chips/modules/scripts/json/json_rep.py -c {input.cor} -o {output} -O {input.overlap} -i {run}" 
+#         "CHIPS/modules/scripts/json/json_rep.py -c {input.cor} -o {output} -O {input.overlap} -i {run}" 
 
 

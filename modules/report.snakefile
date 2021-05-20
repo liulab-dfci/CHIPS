@@ -137,8 +137,8 @@ def result_dict(wildcards):
     report_dict["Config"]={}
     # ChipsVersion
     git_commit_string = "XXXXXX"
-    if os.path.exists("cidc_chips/.git"):
-        git_commit_string = subprocess.check_output('git --git-dir="cidc_chips/.git" rev-parse --short HEAD',shell=True).decode('utf-8').strip()
+    if os.path.exists("CHIPS/.git"):
+        git_commit_string = subprocess.check_output('git --git-dir="CHIPS/.git" rev-parse --short HEAD',shell=True).decode('utf-8').strip()
     report_dict["Config"]["ChipsVersion"]=git_commit_string
     # result path
     report_dict["Config"]["ResultsPath"]=os.path.abspath(output_path)
@@ -326,7 +326,7 @@ rule report_generate:
     message: "REPORT: Generate report for whole runs"
     run:
         report_dict=result_dict(wildcards)
-        template = "cidc_chips/static/chipsTemplate.html"
+        template = "CHIPS/static/chipsTemplate.html"
         report = open(template)
         with open(str(output),"w") as o:
             o.write(report.read().replace("{ RESULT_DICT }",json.dumps(report_dict)))
@@ -371,7 +371,7 @@ rule report_plotMapStat:
     log: _logfile
     conda: "../envs/report/report.yaml"
     shell:
-        "Rscript cidc_chips/modules/scripts/report_mapStats.R {input} {output}"
+        "Rscript CHIPS/modules/scripts/report_mapStats.R {input} {output}"
 
 rule report_plotPBCStat:
     input:
@@ -382,7 +382,7 @@ rule report_plotPBCStat:
     log: _logfile
     conda: "../envs/report/report.yaml"
     shell:
-        "Rscript cidc_chips/modules/scripts/report_plotPBC.R {input} {output}"
+        "Rscript CHIPS/modules/scripts/report_plotPBC.R {input} {output}"
 
 rule report_plotPeakFoldChange:
     input: 
@@ -392,7 +392,7 @@ rule report_plotPeakFoldChange:
     log: _logfile
     conda: "../envs/report/report.yaml"
     shell:
-        "Rscript cidc_chips/modules/scripts/report_plotFoldChange.R {input} {output}"
+        "Rscript CHIPS/modules/scripts/report_plotFoldChange.R {input} {output}"
 
 rule report_zipReport:
     input:

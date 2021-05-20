@@ -83,7 +83,7 @@ rule fastqc_sampleBam:
     benchmark: output_path + "/Benchmark/{sample}_fastqc_samplebam.benchmark"
     conda: "../envs/fastqc/fastqc.yaml"
     shell:
-        "cidc_chips/modules/scripts/fastqc_sampleBam.sh -i {input} -n {params.n} -o {output}"
+        "CHIPS/modules/scripts/fastqc_sampleBam.sh -i {input} -n {params.n} -o {output}"
 
 rule fastqc_convertBamToFastq:
     """USED only when the sample-input is a bam file."""
@@ -133,7 +133,7 @@ rule fastqc_getPerSequenceQual:
     benchmark: output_path + "/Benchmark/{sample}_fastqc_SeqQual.benchmark"
     conda: "../envs/fastqc/fastqc.yaml"
     shell:
-        "cidc_chips/modules/scripts/fastqc_dataExtract.py -f {input} -s {params.section} > {output} 2>>{log}"
+        "CHIPS/modules/scripts/fastqc_dataExtract.py -f {input} -s {params.section} > {output} 2>>{log}"
 
 rule fastqc_getPerSequenceGC:
     """extract per sequence GC contentfrom fastqc_data.txt"""
@@ -149,7 +149,7 @@ rule fastqc_getPerSequenceGC:
     benchmark: output_path + "/Benchmark/{sample}_fastqc_GC.benchmark"
     conda: "../envs/fastqc/fastqc.yaml"
     shell:
-        "cidc_chips/modules/scripts/fastqc_dataExtract.py -f {input} -s {params.section} > {output} 2>>{log}"
+        "CHIPS/modules/scripts/fastqc_dataExtract.py -f {input} -s {params.section} > {output} 2>>{log}"
 
 rule fastqc_extractFastQCStats:
     """extract per sequence GC content, and seq qual stats from fastqc run"""
@@ -163,7 +163,7 @@ rule fastqc_extractFastQCStats:
     benchmark: output_path + "/Benchmark/{sample}_fastqc_extractFastQCStats.benchmark"
     conda: "../envs/fastqc/fastqc.yaml"
     shell:
-        "cidc_chips/modules/scripts/fastqc_stats.py -a {input.qual} -b {input.gc} > {output} 2>>{log}"
+        "CHIPS/modules/scripts/fastqc_stats.py -a {input.qual} -b {input.gc} > {output} 2>>{log}"
 
 rule fastqc_collectFastQCStats:
     """Collect and parse out the fastqc stats for the ALL of the samples"""
@@ -176,7 +176,7 @@ rule fastqc_collectFastQCStats:
     #conda: "../envs/fastqc/fastqc.yaml"
     run:
         files = " -f ".join(input)
-        shell("cidc_chips/modules/scripts/fastqc_getFastQCStats.py -f {files} > {output}")
+        shell("CHIPS/modules/scripts/fastqc_getFastQCStats.py -f {files} > {output}")
 
 rule fastqc_plotFastQCGC:
     """Plots the GC distribution of the sample according to data in
@@ -193,4 +193,4 @@ rule fastqc_plotFastQCGC:
     log: output_path + "/logs/fastqc/{sample}.log"
     conda: "../envs/fastqc/fastqc.yaml"
     shell:
-        "Rscript cidc_chips/modules/scripts/fastqc_plotGC.R {input.gc} {output.png} {output.thumb}"
+        "Rscript CHIPS/modules/scripts/fastqc_plotGC.R {input.gc} {output.png} {output.thumb}"

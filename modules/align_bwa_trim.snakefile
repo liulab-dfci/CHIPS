@@ -41,7 +41,7 @@ checkpoint align_readsLength:
         length=temp(output_path + "/fastqc/{sample}/{sample}_read_length.txt")
     shell:
         # "mkdiroutput_path +  /fastqc/{wildcards.sample}/;"
-        "python cidc_chips/modules/scripts/align_getReadLength.py -f {input} -o {output.length}"
+        "python CHIPS/modules/scripts/align_getReadLength.py -f {input} -o {output.length}"
 
 # bwa version print to stderr, rediret to stdout and get the version line
 BWA_VERSION = subprocess.check_output("bwa 2>&1 | head -3 | tail -1", shell=True)
@@ -128,4 +128,4 @@ rule align_macsRunInfo:
     message: "ALIGN/REPORT - collection bwa version info"
     conda: "../envs/align/align_bwa.yaml"
     shell:
-        "cidc_chips/modules/scripts/align_parseBwaVersion.py -o {output}"
+        "CHIPS/modules/scripts/align_parseBwaVersion.py -o {output}"

@@ -81,7 +81,7 @@ rule frips_sample4MFromNonChrM:
         temp(output_path + '/align/{sample}/{sample}_4M_nonChrM.bam')
     shell:
         """
-        cidc_chips/modules/scripts/frips_sample.sh -n {params.n} -i {input} -o {output} 2>>{log}
+        CHIPS/modules/scripts/frips_sample.sh -n {params.n} -i {input} -o {output} 2>>{log}
         """
 
 rule frips_createUniqueNonChrM:
@@ -122,7 +122,7 @@ rule frips_sample4MFromUniqueNonChrM:
         temp(output_path + '/align/{sample}/{sample}_4M_unique_nonChrM.bam')
     shell:
         """
-        cidc_chips/modules/scripts/frips_sample.sh -n {params.n} -i {input} -o {output} 2>>{log}
+        CHIPS/modules/scripts/frips_sample.sh -n {params.n} -i {input} -o {output} 2>>{log}
         """
 
 if ("macs2_broadpeaks" in config) and config["macs2_broadpeaks"]:
@@ -141,7 +141,7 @@ if ("macs2_broadpeaks" in config) and config["macs2_broadpeaks"]:
         benchmark: output_path + "/Benchmark/{sample}_frips_broadCalculate.benchmark"
         conda: "../envs/frips/frips.yaml"
         shell:
-            "cidc_chips/modules/scripts/frips_calculate.sh -a {input.treat} -b {input.bed} -p {params.pval} > {output} " # 2>>{log}"
+            "CHIPS/modules/scripts/frips_calculate.sh -a {input.treat} -b {input.bed} -p {params.pval} > {output} " # 2>>{log}"
 else:
     rule frips_calculate:
         """Calculate the frip score"""
@@ -158,7 +158,7 @@ else:
         benchmark: output_path + "/Benchmark/{run}.{rep}_frips_calculate.benchmark"
         conda: "../envs/frips/frips.yaml"
         shell:
-            "cidc_chips/modules/scripts/frips_calculate.sh -a {input.treat} -b {input.bed} -p {params.pval} > {output} " # 2>>{log}"
+            "CHIPS/modules/scripts/frips_calculate.sh -a {input.treat} -b {input.bed} -p {params.pval} > {output} " # 2>>{log}"
 
 rule frips_plot:
     input:
@@ -168,7 +168,7 @@ rule frips_plot:
     message:"FRiP: generate FRiP plot for each replicate"
     conda: "../envs/frips/frips.yaml"
     shell:
-        "cidc_chips/modules/scripts/frips_figure.py -f {input} -o {output}"
+        "CHIPS/modules/scripts/frips_figure.py -f {input} -o {output}"
 
 rule frips_pbc:
     """Generate the PBC histogram for each normalized sample, which will be
@@ -185,7 +185,7 @@ rule frips_pbc:
     log: output_path + "/logs/frips/{sample}.log"
     conda: "../envs/frips/frips.yaml"
     shell:
-        "cidc_chips/modules/scripts/frips_pbc.sh -i {input} -o {output} " #2>> {log}"
+        "CHIPS/modules/scripts/frips_pbc.sh -i {input} -o {output} " #2>> {log}"
 
 rule frips_collectPbc:
     """Collect and parse out the PBC for the ALL of the samples"""
@@ -200,9 +200,9 @@ rule frips_collectPbc:
     conda: "../envs/frips/frips.yaml"
     # run:
     #     files = " -f ".join(input)
-    #     shell("cidc_chips/modules/scripts/frips_collectPBC.py -f {files} > {output} 2>>{log}")
+    #     shell("CHIPS/modules/scripts/frips_collectPBC.py -f {files} > {output} 2>>{log}")
     shell:
-        "cidc_chips/modules/scripts/frips_collectPBC.py {params.files} > {output} " #2>>{log}"
+        "CHIPS/modules/scripts/frips_collectPBC.py {params.files} > {output} " #2>>{log}"
 
 rule frips_nonChrMStats:
     """Get the nonChrM mapping stats for each aligment run"""
@@ -241,9 +241,9 @@ rule frips_collectNonChrMStats:
     conda: "../envs/frips/frips.yaml"
     # run:
     #     files = " -f ".join(input)
-    #     shell("cidc_chips/modules/scripts/frips_collectNonChrM.py -f {files} > {output} 2>>{log}")
+    #     shell("CHIPS/modules/scripts/frips_collectNonChrM.py -f {files} > {output} 2>>{log}")
     shell:
-        "cidc_chips/modules/scripts/frips_collectNonChrM.py {params.files} > {output} " #2>>{log}"
+        "CHIPS/modules/scripts/frips_collectNonChrM.py {params.files} > {output} " #2>>{log}"
 
 rule frips_getSampleFragLength:
     """Dump all of the sample's fragment lengths into
@@ -279,7 +279,7 @@ rule frips_makeFragPlot:
         output_path + "/frag/{sample}/{sample}_fragDist.png"
     shell:
         #RUN the R script to get the plot
-        "cidc_chips/modules/scripts/frag_plotFragDist.R {input} {output} {params.name} " #2>>{log}"
+        "CHIPS/modules/scripts/frag_plotFragDist.R {input} {output} {params.name} " #2>>{log}"
 
 rule frips_getFripStats:
     """Collect the frips statistics fromoutput_path +  /frips/{run}/{run}_frip.txt"""
@@ -295,6 +295,6 @@ rule frips_getFripStats:
     conda: "../envs/frips/frips.yaml"
     # run:
     #     files = " -f ".join(input)
-    #     shell("cidc_chips/modules/scripts/frips_getFrips.py -f {files} -o {output} 2>>{log}")
+    #     shell("CHIPS/modules/scripts/frips_getFrips.py -f {files} -o {output} 2>>{log}")
     shell:
-        "cidc_chips/modules/scripts/frips_getFrips.py {params.files} -o {output} " #2>>{log}"
+        "CHIPS/modules/scripts/frips_getFrips.py {params.files} -o {output} " #2>>{log}"

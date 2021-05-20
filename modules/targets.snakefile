@@ -36,7 +36,7 @@ rule targets_get5FoldPeaksRPScore:
     log:output_path + "/logs/targets/{run}.{rep}.log"
     benchmark: output_path + "/Benchmark/{run}.{rep}_targets_get5FoldPeaksRPScore.benchmark"
     shell:
-        "python cidc_chips/modules/scripts/targets_RegPotential_Version2.py -p {input} -a {params.genome} -n {output} -d {params.decay}"
+        "python CHIPS/modules/scripts/targets_RegPotential_Version2.py -p {input} -a {params.genome} -n {output} -d {params.decay}"
 
 rule targets_getTopPeaks:
     input:
@@ -63,7 +63,7 @@ rule targets_getTopPeaksRPScore:
     log:output_path + "/logs/targets/{run}.{rep}.log"
     benchmark: output_path + "/Benchmark/{run}.{rep}_targets_getTopPeaksRPScore.benchmark"
     shell:
-        "python cidc_chips/modules/scripts/targets_RegPotential_Version2.py -p {input} -a {params.genome} -n {output} -d {params.decay}"
+        "python CHIPS/modules/scripts/targets_RegPotential_Version2.py -p {input} -a {params.genome} -n {output} -d {params.decay}"
 
 
 rule targets_getAllPeaksRPScore:
@@ -78,7 +78,7 @@ rule targets_getAllPeaksRPScore:
     log:output_path + "/logs/targets/{run}.{rep}.log"
     benchmark: output_path + "/Benchmark/{run}.{rep}_targets_getAllPeaksRPScore.benchmark"
     shell:
-        "python cidc_chips/modules/scripts/targets_RegPotential_Version2.py -p {input} -a {params.genome} -n {output} -d {params.decay}"
+        "python CHIPS/modules/scripts/targets_RegPotential_Version2.py -p {input} -a {params.genome} -n {output} -d {params.decay}"
 
 rule targets_getAllPeaksRPScore1k:
     input:
@@ -92,7 +92,7 @@ rule targets_getAllPeaksRPScore1k:
     log:output_path + "/logs/targets/{run}.{rep}.log"
     benchmark: output_path + "/Benchmark/{run}.{rep}_targets_getAllPeaksRPScore1k.benchmark"
     shell:
-        "python cidc_chips/modules/scripts/targets_RegPotential_Version2.py -p {input} -a {params.genome} -n {output} -d {params.decay}"
+        "python CHIPS/modules/scripts/targets_RegPotential_Version2.py -p {input} -a {params.genome} -n {output} -d {params.decay}"
 
 rule targets_getAllPeaksRPScore100k:
     input:
@@ -106,4 +106,4 @@ rule targets_getAllPeaksRPScore100k:
     log:output_path + "/logs/targets/{run}.{rep}.log"
     benchmark: output_path + "/Benchmark/{run}.{rep}_targets_getAllPeaksRPScore100k.benchmark"
     shell:
-        "python cidc_chips/modules/scripts/targets_RegPotential_Version2.py -p {input} -a {params.genome} -n {output} -d {params.decay}"
+        "python CHIPS/modules/scripts/targets_RegPotential_Version2.py -p {input} -a {params.genome} -n {output} -d {params.decay}"

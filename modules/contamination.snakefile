@@ -113,6 +113,6 @@ rule contamination_collectAllContamination:
     conda: "../envs/contamination/contamination.yaml"
     # run:
     #     files = " -f ".join(input)
-    #     shell("cidc_chips/modules/scripts/contam_getStats.py -f {files} -o {output} 2>>{log}")
+    #     shell("CHIPS/modules/scripts/contam_getStats.py -f {files} -o {output} 2>>{log}")
     shell:
-        "cidc_chips/modules/scripts/contam_getStats.py {params.files} -o {output} "#2>>{log}"
+        "CHIPS/modules/scripts/contam_getStats.py {params.files} -o {output} "#2>>{log}"
