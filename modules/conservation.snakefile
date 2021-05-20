@@ -94,4 +94,4 @@ rule conservation_plotConservation:
     benchmark: output_path + "/Benchmark/{run}.{rep}_conservation_plotConservation.benchmark"
     conda: "../envs/conservation/conservation.yaml"
     shell:
-        "cidc_chips/modules/scripts/conservation_onebw_plot.py -t Conservation_at_summits -d {params.db} -o  {params.main_output_path}/conserv/{params.run}/{params.run}_conserv -l Peak_summits {input} -w {params.width} > {output.score} 2>>{log}"
+        "CHIPS/modules/scripts/conservation_onebw_plot.py -t Conservation_at_summits -d {params.db} -o  {params.main_output_path}/conserv/{params.run}/{params.run}_conserv -l Peak_summits {input} -w {params.width} > {output.score} 2>>{log}"

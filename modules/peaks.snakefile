@@ -311,7 +311,7 @@ if config.get("macs2_broadpeaks"):
         benchmark: output_path + "/Benchmark/{run}.{rep}_peaks_getBroadStats.benchmark"
         conda: "../envs/peaks/peaks.yaml"
         shell:
-            "cidc_chips/modules/scripts/peaks_getPeakStats.py {params.files} -o {output}"# 2>>{log}"
+            "CHIPS/modules/scripts/peaks_getPeakStats.py {params.files} -o {output}"# 2>>{log}"
 
     rule peaks_broadPeaksPlot:
         input:
@@ -323,7 +323,7 @@ if config.get("macs2_broadpeaks"):
         conda: "../envs/peaks/peaks.yaml"
         benchmark: output_path + "/Benchmark/{run}.{rep}_peaks_broadPeaksPlot.benchmark"
         shell:
-            "cidc_chips/modules/scripts/peaks_figure.py -f {input.peaks} -c {input.ceas} -o {output}"
+            "CHIPS/modules/scripts/peaks_figure.py -f {input.peaks} -c {input.ceas} -o {output}"
 
 else:
     rule peaks_macs2Callpeaks:
@@ -477,7 +477,7 @@ else:
         #benchmark: output_path + "/Benchmark/{run}.{rep}_peaks_getPeaksStats.benchmark"
         conda: "../envs/peaks/peaks.yaml"
         shell:
-            "cidc_chips/modules/scripts/peaks_getPeakStats.py {params.files} -o {output}"# 2>>{log}"
+            "CHIPS/modules/scripts/peaks_getPeakStats.py {params.files} -o {output}"# 2>>{log}"
 
     rule peaks_sortSummits:
         input:
@@ -500,7 +500,7 @@ else:
         conda: "../envs/peaks/peaks.yaml"
         benchmark: output_path + "/Benchmark/{run}.{rep}_peaks_NarrowPeaksPlot.benchmark"
         shell:
-            "cidc_chips/modules/scripts/peaks_figure.py -f {input.peaks} -c {input.ceas} -o {output}"
+            "CHIPS/modules/scripts/peaks_figure.py -f {input.peaks} -c {input.ceas} -o {output}"
 
 
 rule peaks_macs2GetFragment:
@@ -631,7 +631,7 @@ rule peaks_generateIGVsession:
         output_path + "/peaks/all_treatments.igv.xml"
     message: "PEAKS: generate IGV session for all treatment.bw files"
     shell:
-        "cidc_chips/modules/scripts/peaks_generateIGVSession.py -g {params.genome} {params.treats} -o {output}"# 2>>{log}"
+        "CHIPS/modules/scripts/peaks_generateIGVSession.py -g {params.genome} {params.treats} -o {output}"# 2>>{log}"
 
 rule peaks_generateIGVperTrack:
     """Generates analysis/peaks/{runRep}/{runRep}.igv.xml, a igv session of
@@ -649,4 +649,4 @@ rule peaks_generateIGVperTrack:
     message: "PEAKS: generate IGV session for {run}.{rep} treatment.bw file"
     shell:
         #NOTE: difference with this call and with generate_IGV_session is we pass the -l param which changes the file path
-        "cidc_chips/modules/scripts/peaks_generateIGVSession.py -g {params.genome} -t {input} -o {output} -l"# 2>>{log}"
+        "CHIPS/modules/scripts/peaks_generateIGVSession.py -g {params.genome} -t {input} -o {output} -l"# 2>>{log}"

@@ -73,9 +73,9 @@ rule mapmaker_config:
         # bam_files= " -a ".join([make_relative(bam) for bam in input.bam_files])
         # igv_files= " -i ".join([make_relative(igv) for igv in input.igv_files])
         # names = " -n ".join(params.run_names)
-        # shell("cidc_chips/modules/scripts/mapmaker_config.py -n {names} -b {bed_files} -w {bw_files} -a {bam_files} -i {igv_files} -c {input.config} -o {output}")
+        # shell("CHIPS/modules/scripts/mapmaker_config.py -n {names} -b {bed_files} -w {bw_files} -a {bam_files} -i {igv_files} -c {input.config} -o {output}")
     shell:
-      "cidc_chips/modules/scripts/mapmaker_config.py {params.names} {params.bed_files} {params.bw_files} {params.bam_files} {params.igv_files} -c {input.config} -o {output}"  
+      "CHIPS/modules/scripts/mapmaker_config.py {params.names} {params.bed_files} {params.bw_files} {params.bam_files} {params.igv_files} -c {input.config} -o {output}"  
 
 rule mapmaker_meta:
     """Tries to configure the mapmaker meta based on the chips run info"""
@@ -91,6 +91,6 @@ rule mapmaker_meta:
         output_path + "/mapmaker/metasheet.csv"
     # run:
     #     names = " -n ".join(params.run_names)
-    #     shell("cidc_chips/modules/scripts/mapmaker_meta.py -n {names} -o {output}")
+    #     shell("CHIPS/modules/scripts/mapmaker_meta.py -n {names} -o {output}")
     shell:
-        "cidc_chips/modules/scripts/mapmaker_meta.py {params.names} -o {output}"
+        "CHIPS/modules/scripts/mapmaker_meta.py {params.names} -o {output}"

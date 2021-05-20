@@ -3,7 +3,7 @@
 1. paths to all of the .treat.bw files
 2. the genome used, e.g. hg19
 
-NOTE: uses cidc_chips/static/chips_igv.session.xml as a TEMPLATE and fills in 
+NOTE: uses CHIPS/static/chips_igv.session.xml as a TEMPLATE and fills in 
 the resource and track info
 ref: https://software.broadinstitute.org/software/igv/Sessions
 
@@ -20,9 +20,9 @@ import copy
 
 _attribs = {'altColor':"0,0,178", 'autoScale':"false",
             'clazz':"org.broad.igv.track.DataSourceTrack",
-            'color':"0,0,178", 'displayMode':"COLLAPSED", 
+            'color':"0,0,178", 'displayMode':"COLLAPSED",
             'featureVisibilityWindow':"-1", 'fontSize':"10",
-            'normalize':"false", 'renderer':"BAR_CHART", 
+            'normalize':"false", 'renderer':"BAR_CHART",
             'sortable':"true", 'visible':"true",'windowFunction':"mean"}
 
 
@@ -33,7 +33,7 @@ def main():
     optparser.add_option("-t", "--treats", action="append", help="list of paths to treatment bw files")
     optparser.add_option("-x", "--xml", help="xml template to use")
     optparser.add_option("-o", "--out", help="output file")
-    optparser.add_option("-l", "--treatIsLocal", help="treatment.bw are in local dir", action="store_true")    
+    optparser.add_option("-l", "--treatIsLocal", help="treatment.bw are in local dir", action="store_true")
     (options, args) = optparser.parse_args(sys.argv)
 
     if not options.genome or not options.treats or not options.out:
@@ -45,7 +45,7 @@ def main():
         _template = options.xml
     else:
         #OTHERWISE: use default template
-        _template = "cidc_chips/static/chips_igv.session.xml"
+        _template = "CHIPS/static/chips_igv.session.xml"
 
     if not os.path.isfile(_template):
         print("ERROR: Unable to find template XML file OR invalid file")
@@ -53,14 +53,14 @@ def main():
 
     tree = ET.parse(_template)
     root = tree.getroot()
-    
+
     #SET the genome
     root.attrib['genome'] = options.genome
 
     #GET the two important elements: Resources and (the first) Panel
     resources = root.findall('Resources')[0]
     panel = root.findall('Panel')[0]
-    
+
     #TEMPLATE track
     track = ET.Element('Track')
     track.attrib = _attribs
@@ -77,16 +77,16 @@ def main():
 
         #ADD new resource .bw file
         res = ET.Element('Resource') #singular of Resources
-        res.attrib['path'] = name if options.treatIsLocal else relative_path 
+        res.attrib['path'] = name if options.treatIsLocal else relative_path
         resources.append(res)
-        
+
         #ADD new track to panel
         new_track = copy.deepcopy(track)
         #fixed attribs
-    
+
         new_track.attrib['id'] = name if options.treatIsLocal else relative_path
         new_track.attrib['name'] = name
-        
+
         #create sub-elm: DataRange
         panel.append(new_track)
 
@@ -97,5 +97,3 @@ def main():
 
 if __name__=='__main__':
     main()
-
-

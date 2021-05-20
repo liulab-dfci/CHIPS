@@ -100,7 +100,7 @@ rule align_mapFigure:
     message: "ALIGN: plot mapping rate for {input}"
     conda: "../envs/align/align_common.yaml"
     shell:
-        "cidc_chips/modules/scripts/align_mappedFigure.py -f {input} -o {output}"
+        "CHIPS/modules/scripts/align_mappedFigure.py -f {input} -o {output}"
 
 rule align_collectMapStats:
     """Collect and parse out the mapping stats for the ALL of the samples"""
@@ -117,9 +117,9 @@ rule align_collectMapStats:
     #NOTE: can't do conda envs with run
     #run:
     #    files = " -f ".join(input)
-    #    shell("cidc_chips/modules/scripts/align_getMapStats.py -f {files} > {output} 2>>{log}")
+    #    shell("CHIPS/modules/scripts/align_getMapStats.py -f {files} > {output} 2>>{log}")
     shell:
-        "cidc_chips/modules/scripts/align_getMapStats.py {params.files} > {output}"
+        "CHIPS/modules/scripts/align_getMapStats.py {params.files} > {output}"
 
 
 if config.get("sentieon"):
@@ -350,4 +350,4 @@ rule align_readsPerChromStat:
     log: output_path + "/logs/align/{sample}.log"
     conda: "../envs/align/align_common.yaml"
     shell:
-        "cidc_chips/modules/scripts/align_readsPerChrom.sh -a {input.bam} > {output} 2>> {log}"
+        "CHIPS/modules/scripts/align_readsPerChrom.sh -a {input.bam} > {output} 2>> {log}"

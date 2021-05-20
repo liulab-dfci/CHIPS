@@ -36,7 +36,7 @@ rule epicypher_alignToEpicypher:
     input:
         output_path + "/align/{sample}/{sample}.unmapped.fq.gz"
     params:
-        epicypher_index=lambda wildcards: "cidc_chips/static/epicypher/%s/epicypher.fa" % wildcards.ttype,
+        epicypher_index=lambda wildcards: "CHIPS/static/epicypher/%s/epicypher.fa" % wildcards.ttype,
         #check for PE mate
         mate2 =  lambda wildcards: output_path + "/align/{sample}/{sample}.unmapped.fq2.gz" if len(config["samples"][wildcards.sample]) == 2 else ""
     output:
@@ -90,7 +90,7 @@ rule epicypher_quantify:
         bam=output_path + "/epicypher.{ttype}/{sample}/{sample}.epicypher.sorted.unique.bam",
         bai=output_path + "/epicypher.{ttype}/{sample}/{sample}.epicypher.sorted.unique.bam.bai"
     params:
-        script = lambda wildcards: "cidc_chips/modules/scripts/epicypher_%s_quant.py" % wildcards.ttype
+        script = lambda wildcards: "CHIPS/modules/scripts/epicypher_%s_quant.py" % wildcards.ttype
     output:
         output_path + "/epicypher.{ttype}/{sample}/{sample}.epicypher.quant.txt"
     message: "EPICYPHER: quantifying epicypher marks"

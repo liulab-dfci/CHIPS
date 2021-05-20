@@ -1,6 +1,6 @@
 #NOTE: you won't typically have to change the following two lines!
 metasheet: 'metasheet.csv'
-ref: "cidc_chips/ref.yaml"
+ref: "CHIPS/ref.yaml"
 
 #genome trackview parameters
 genes_to_plot: GAPDH ACTB TP53

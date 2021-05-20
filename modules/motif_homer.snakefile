@@ -89,9 +89,9 @@ rule motif_getMotifSummary:
     conda: "../envs/motif/motif.yaml"
     # run:
     #     files = " -m ".join(input)
-    #     shell("cidc_chips/modules/scripts/motif_homerSummary.py -m {files} -o {output} 2>> {log}")
+    #     shell("CHIPS/modules/scripts/motif_homerSummary.py -m {files} -o {output} 2>> {log}")
     shell:
-        "cidc_chips/modules/scripts/motif_homerSummary.py {params.files} -o {output} " # 2>> {log}"
+        "CHIPS/modules/scripts/motif_homerSummary.py {params.files} -o {output} " # 2>> {log}"
 
 rule motif_homerAnnotatePeaks:
     """Annotate peak files.
@@ -121,4 +121,4 @@ rule motif_homerProcessAnnPeaks:
     log: output_path + "/logs/motif/{run}.{rep}.log"
     #conda: "../envs/motif/motif.yaml"
     shell:
-        "cidc_chips/modules/scripts/motif_annPeaksTsvCsv.sh {input} {output.tsv} {output.csv}"
+        "CHIPS/modules/scripts/motif_annPeaksTsvCsv.sh {input} {output.tsv} {output.csv}"
