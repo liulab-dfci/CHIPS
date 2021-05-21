@@ -1,2 +1,0 @@
-caption: 'The conservation plots of transcription factor (ChIP-seq) runs typically show a high focal point around peak summits (characterized as "needle points"), while histone runs typically show bi
-modal peaks (characterized as "shoulders"). Further downstream ananlyses, including regulatory potential scores derived from LISA, are also written to a subfolder for each sample in the report directory.'
