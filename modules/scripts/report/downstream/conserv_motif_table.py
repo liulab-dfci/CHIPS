@@ -30,10 +30,11 @@ def main():
         os.mkdir(options.outpath + "/plots_motif")
 
     conserv_out=defaultdict(list)
-    for file in options.conserv:
-        os.system("cp {i} {path}/plots_conserv/".format(i = file, path = options.outpath))
-        fname = os.path.basename(file)
-        sname = fname.split("_")[0]
+    for ffile in options.conserv:
+        os.system("cp {i} {path}/plots_conserv/".format(i = ffile, path = options.outpath))
+        fname = os.path.basename(ffile)
+        #sname = fname.split("_")[0] #this doesn't work for samples with '_' in the name
+        sname = fname.replace('_conserv_thumb.png', '')
         path = os.path.join("img:Downstream/plots_conserv/" + fname)
         conserv_out[sname].append(path)
 
@@ -55,34 +56,40 @@ def main():
     else:
         print("homer is enabled")
         homer_out=defaultdict(list)
-        for file in options.homer:
-            fname = file.split("/")[-4:]
-            sname = file.split("/")[-4]
+        for ffile in options.homer:
+            fname = ffile.split("/")[-4:]
+            sname = ffile.split("/")[-4]
             pname = "_".join(fname)
             #print(pname)
-            os.system("cp {i} {path}/plots_motif/{pname}".format(i = file, path = options.outpath, pname = pname))
+            os.system("cp {i} {path}/plots_motif/{pname}".format(i = ffile, path = options.outpath, pname = pname))
             path = os.path.join("img:Downstream/plots_motif/" + pname)
             homer_out[sname].append(path)
 
         motif_out=defaultdict(list)
         pvalue_out=defaultdict(list)
-        for file in options.motif:
-            sname = file.split("/")[-3]
-            fhd = open(file, "rt")
+        for ffile in options.motif:
+            sname = ffile.split("/")[-3]
+            fhd = open(ffile, "rt")
             line = fhd.readlines()
-            line = line[1].strip().split("\t")
-            m = line[0].split('(')[0]
-            #print(m)
-            p = str(float(line[3])*-1)
-            #print(p)
-            motif_out[sname].append(m)
-            pvalue_out[sname].append(p)
+            if line: #Check for empty motif files
+                line = line[1].strip().split("\t")
+                m = line[0].split('(')[0]
+                #print(m)
+                p = str(float(line[3])*-1)
+                #print(p)
+                motif_out[sname].append(m)
+                pvalue_out[sname].append(p)
+            else: #No known motifs
+                print("No known motifs for sample %s!" % sname)
+                motif_out[sname].append('N/A')
+                pvalue_out[sname].append(str(0.0))
             fhd.close()
 
         out = open(options.output, "w")
         #write header
         out.write("%s\n" % ",".join(['Sample', 'Conservation', 'Motif', 'Homer Motif Logo', 'Negative Log P-value']))
         for k in conserv_out.keys():
+            print(str(k))
             s = [str(k)]
             l = conserv_out[k] + motif_out[k] + homer_out[k] + pvalue_out[k]
             #print(l)

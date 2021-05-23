@@ -51,7 +51,7 @@ def report_htmlTargets(wildcards):
     for list_num, gene in enumerate(config["genes_to_plot"].strip().split()):
         if gene in pd.read_csv(config['geneBed'], sep = '\t',header=None, index_col=None).iloc[:-3].values:
             ls.append((output_path + "/report/Genome_Track_View/{num}_genome_track_for_{track}.png").format(num = list_num, track = gene))
-
+            ls.append(output_path + "/report/Genome_Track_View/0_details.yaml")
     #DOWNSTREAM
     ls.append(output_path + "/report/Downstream/01_conservation_and_top_motifs.csv")
     ls.append(output_path + "/report/Downstream/01_details.yaml")
@@ -314,13 +314,15 @@ rule report_genome_track_make_plot:
         ini= output_path + "/report/Genome_Track_View/tracks_all_vlines.ini",
         extend= output_path + "/report/Genome_Track_View/extend.bed",
     output:
-        _png_list
-        #png= lambda wildcards: [" -o " + output_path + "/report/Genome_Track_View/%s_genome_track_for_%s.png" % (i,i) for i, i in enumerate(config["genes_to_plot"].strip().split())]
+        plist=_png_list,
+        details=output_path + "/report/Genome_Track_View/0_details.yaml",
     params:
         genes= lambda wildcards: [" -g %s" % g for g in config["genes_to_plot"].strip().split()],
-        png= lambda wildcards, output: " -o ". join(output),
+        png= lambda wildcards, output: " -o ". join(output.plist),
+        caption="""caption: 'The genomic coordinates and chromosome number are indicated above the sample tracks. Transcripts in this region are indicated by the bars below the sample tracks.' """
     shell:
-        """CHIPS/modules/scripts/report/genome_track_view/make_track_png.py -i {input.ini} -e {input.extend} {params.genes} -o {params.png}"""
+        """echo "{params.caption}" > {output.details} &&
+        CHIPS/modules/scripts/report/genome_track_view/make_track_png.py -i {input.ini} -e {input.extend} {params.genes} -o {params.png}"""
 
 ########################### END Genome Track View Section ####################
 ########################### Downstream Section ################################
@@ -351,14 +353,14 @@ rule report_downstream_conser_motif:
     input:
         unpack(report_downstream_conser_motif_inputFn)
     output:
-        csv = output_path + "/report/Downstream/01_conservation_and_top_motifs.csv",
-        details = output_path + "/report/Downstream/01_details.yaml",
+        csv= output_path + "/report/Downstream/01_conservation_and_top_motifs.csv",
+        details= output_path + "/report/Downstream/01_details.yaml",
     params:
         outpath=output_path + "/report/Downstream",
         conserv_logos= lambda wildcards, input: " -c ".join(input.conserv_logos),
         motif_logos= lambda wildcards, input: " -m ".join(input.homer_logos),
         motif_txt= lambda wildcards, input: " -t ".join(input.motif_txt),
-        caption = """caption: 'The conservation plots of transcription factor (ChIP-seq) runs typically show a high focal point around peak summits (characterized as "needle points"), while histone runs typically show bimodal peaks (characterized as "shoulders"). If motif analysis is enabled, the top 5000 most significant peak summits (ranked by the MACS P-value) are written to a subfolder for each sample in the report directory. Though several motifs typically arise for each sample, only the top hit is shown here. Further downstream analyses, including regulatory potential scores derived from LISA, are also available for each sample in the report directory.' """
+        caption= """caption: 'The conservation plots of transcription factor (ChIP-seq) runs typically show a high focal point around peak summits (characterized as "needle points"), while histone runs typically show bimodal peaks (characterized as "shoulders"). If motif analysis is enabled, the top 5000 most significant peak summits (ranked by the MACS P-value) are written to a subfolder for each sample in the report directory. Though several motifs typically arise for each sample, only the top hit is shown here. Further downstream analyses, including regulatory potential scores derived from LISA, are also available for each sample in the report directory.' """
     shell:
         """ echo "{params.caption}" > {output.details} &&
         CHIPS/modules/scripts/report/downstream/conserv_motif_table.py -c {params.conserv_logos} -p {params.outpath} -o {output.csv} -t {params.motif_txt} -m {params.motif_logos}"""
